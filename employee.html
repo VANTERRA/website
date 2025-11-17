@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitarbeiterbereich - VANTERRA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div id="loginSection" class="login-section">
+        <div class="container">
+            <div class="login-box">
+                <h2>🔐 Mitarbeiterbereich</h2>
+                <p>Bitte geben Sie Ihre Zugangsdaten ein</p>
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="password">Passwort</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Anmelden</button>
+                    <p id="errorMessage" class="error-message"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Protected Content -->
+    <div id="protectedContent" class="protected-content" style="display: none;">
+        <section class="page-header">
+            <div class="container">
+                <h1>Willkommen im Mitarbeiterbereich</h1>
+                <p>VANTERRA Internal Systems</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="employee-welcome">
+                    <h2>Guten Tag Mitarbeiter!</h2>
+                    <p>Sie haben erfolgreich Zugriff auf den internen Bereich erhalten.</p>
+                    <button id="logoutBtn" class="btn btn-secondary">Abmelden</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                    <p class="small-text">Vertrauliche Informationen unterliegen strengster Geheimhaltung</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Intern</h4>
+                    <p><a href="employee.html" class="footer-link">Mitarbeiterbereich</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="employee.js"></script>
+</body>
+
+</html>
