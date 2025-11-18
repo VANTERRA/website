@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const logoutBtn = document.getElementById('logoutBtn');
 
     // Passwort (kann später geändert werden)
-    const correctPassword = 'VANTERRA2024';
+    const correctPassword = 'Zugangsdaten';
 
     // Prüfe ob bereits eingeloggt
     if (sessionStorage.getItem('employeeLoggedIn') === 'true') {

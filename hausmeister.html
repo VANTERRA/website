@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitarbeiterbereich - VANTERRA</title>
+    <title>Hausmeister - VANTERRA</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -24,43 +24,51 @@
         </div>
     </nav>
 
-    <!-- Login Form -->
-    <div id="loginSection" class="login-section">
+    <section class="page-header">
         <div class="container">
-            <div class="login-box">
-                <h2>🔐 Mitarbeiterbereich</h2>
-                <p>Bitte geben Sie die Zugangsdaten ein!</p>
-                <form id="loginForm" class="login-form">
-                    <div class="form-group">
-                        <label for="password">Passwort</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Anmelden</button>
-                    <p id="errorMessage" class="error-message"></p>
-                </form>
-            </div>
+            <h1>Hausmeister Service</h1>
+            <p>Technische Unterstützung & Gebäudeverwaltung</p>
         </div>
-    </div>
+    </section>
 
-    <!-- Protected Content -->
-    <div id="protectedContent" class="protected-content" style="display: none;">
-        <section class="page-header">
-            <div class="container">
-                <h1>Willkommen im Mitarbeiterbereich</h1>
-                <p>VANTERRA Internal Systems</p>
-            </div>
-        </section>
+    <section class="content-section">
+        <div class="container">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2>Hausmeister Information</h2>
 
-        <section class="content-section">
-            <div class="container">
-                <div class="employee-welcome">
-                    <h2>Guten Tag Mitarbeiter!</h2>
-                    <p>Sie haben erfolgreich Zugriff auf den internen Bereich erhalten.</p>
-                    <button id="logoutBtn" class="btn btn-secondary">Abmelden</button>
+                <div class="info-box">
+                    <h3>👨‍🔧 T■o■■■ ■■■■■■mann </h3>
+                    <p><strong>Hausmeister & Facility Manager</strong><br>
+                    Seit 2010 bei VANTERRA</p>
+                </div>
+
+                <div class="info-box" style="margin-top: 30px;">
+                    <h3>📞 Direkte Kontaktdaten</h3>
+                    <p>Telefon: +49 (0) ■■■■■■■■■<br>
+                    E-Mail: ■■■■■■■■■@vanterra-facility.com<br>
+                    <small>Mo-Fr: 12:00 - Mittag</small></p>
+                </div>
+
+                <div class="info-box" style="margin-top: 30px;">
+                    <h3>🔧 Zuständigkeiten</h3>
+                    <p>
+                        • Gebäudewartung<br>
+                        • Reparaturen<br>
+                        • Sicherheitskontrollen<br>
+                        • Schlüsselverwaltung<br>
+                        • Technische Störungen
+                    </p>
+                </div>
+
+                <div class="info-box dark" style="margin-top: 30px;">
+                    <h3>⚡ Notfall-Kontakt - Nur mit Kundennummer!</h3>
+                    <p><strong>24/7 Notfall-Hotline:</strong><br>
+                    +49 (0) XXX XXXXXXX <br>
+                    <small>Vergessen Sie Ihre Kundennummer nicht!</small></p>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="container">
@@ -83,8 +91,6 @@
             </div>
         </div>
     </footer>
-
-    <script src="employee.js"></script>
 </body>
 
 </html>

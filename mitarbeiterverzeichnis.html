@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitarbeiterverzeichnis - VANTERRA</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .employee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .employee-table th,
+        .employee-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .employee-table th {
+            background: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+        .employee-table tr:hover {
+            background: #f5f5f5;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .back-button:hover {
+            background: #34495e;
+        }
+        .access-denied {
+            display: none;
+            text-align: center;
+            padding: 100px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="accessDenied" class="access-denied">
+            <h1>🔒 Zugriff verweigert</h1>
+            <p>Sie haben keine Berechtigung für diese Seite.</p>
+            <a href="admin.html" class="back-button">Zum Login</a>
+        </div>
+
+        <div id="employeeContent" style="display: none;">
+            <section class="page-header">
+                <h1>Mitarbeiterverzeichnis</h1>
+                <p>Vertrauliche Mitarbeiterdaten - Nur für autorisiertes Personal</p>
+            </section>
+
+            <section class="content-section">
+                <a href="admin.html" class="back-button">← Zurück zum Admin-Bereich</a>
+
+                <table class="employee-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Abteilung</th>
+                            <th>E-Mail</th>
+                            <th>Sicherheitsstufe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Dr. Emil Carvon</td>
+                            <td>Geschäftsführer</td>
+                            <td>Leitung</td>
+                            <td>e.carvon@vanterra.com</td>
+                            <td>Level 5</td>
+                        </tr>
+                        <tr>
+                            <td>042</td>
+                            <td>Dr. Sarah Winters</td>
+                            <td>Leitende Wissenschaftlerin</td>
+                            <td>Projekt Frostline</td>
+                            <td>s.winters@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>087</td>
+                            <td>Marcus Klein</td>
+                            <td>Sicherheitsbeauftragter</td>
+                            <td>Sicherheit</td>
+                            <td>m.klein@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>103</td>
+                            <td>Dr. Anna Schmidt</td>
+                            <td>Forscherin</td>
+                            <td>Abteilung X7</td>
+                            <td>a.schmidt@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>156</td>
+                            <td>Thomas Berg</td>
+                            <td>Labortechniker</td>
+                            <td>Labor Ost</td>
+                            <td>t.berg@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>201</td>
+                            <td>Lisa Müller</td>
+                            <td>IT-Administratorin</td>
+                            <td>IT</td>
+                            <td>l.mueller@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>245</td>
+                            <td>Dr. Johann Weber</td>
+                            <td>Biologe</td>
+                            <td>Biomedizin</td>
+                            <td>j.weber@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>302</td>
+                            <td>Elena Richter</td>
+                            <td>Assistentin</td>
+                            <td>Verwaltung</td>
+                            <td>e.richter@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>104</td>
+                            <td>Dr. Michael Brenner</td>
+                            <td>Chemiker</td>
+                            <td>Labor West</td>
+                            <td>m.brenner@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>105</td>
+                            <td>Julia Hartmann</td>
+                            <td>Projektmanagerin</td>
+                            <td>Verwaltung</td>
+                            <td>j.hartmann@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>106</td>
+                            <td>Felix Zimmermann</td>
+                            <td>Datenwissenschaftler</td>
+                            <td>IT</td>
+                            <td>f.zimmermann@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>107</td>
+                            <td>Dr. Petra Hoffmann</td>
+                            <td>Toxikologin</td>
+                            <td>Abteilung X7</td>
+                            <td>p.hoffmann@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>108</td>
+                            <td>Stefan Wagner</td>
+                            <td>Elektrotechniker</td>
+                            <td>Technik</td>
+                            <td>s.wagner@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>109</td>
+                            <td>Katrin Becker</td>
+                            <td>Qualitätskontrolleurin</td>
+                            <td>Labor Ost</td>
+                            <td>k.becker@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>110</td>
+                            <td>Dr. Robert Schreiber</td>
+                            <td>Molekularbiologe</td>
+                            <td>Projekt Frostline</td>
+                            <td>r.schreiber@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>111</td>
+                            <td>Nina Schulze</td>
+                            <td>HR-Managerin</td>
+                            <td>Personal</td>
+                            <td>n.schulze@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>112</td>
+                            <td>Oliver Koch</td>
+                            <td>Netzwerkadministrator</td>
+                            <td>IT</td>
+                            <td>o.koch@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>113</td>
+                            <td>Dr. Claudia Bauer</td>
+                            <td>Genetikerin</td>
+                            <td>Biomedizin</td>
+                            <td>c.bauer@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>114</td>
+                            <td>Martin Wolf</td>
+                            <td>Facility Manager</td>
+                            <td>Gebäudeverwaltung</td>
+                            <td>m.wolf@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>115</td>
+                            <td>Sandra Neumann</td>
+                            <td>Finanzbuchhalterin</td>
+                            <td>Finanzen</td>
+                            <td>s.neumann@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>116</td>
+                            <td>Dr. Frank Meyer</td>
+                            <td>Pharmakologe</td>
+                            <td>Abteilung X7</td>
+                            <td>f.meyer@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>117</td>
+                            <td>Laura Fischer</td>
+                            <td>Kommunikationsmanagerin</td>
+                            <td>Marketing</td>
+                            <td>l.fischer@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>118</td>
+                            <td>Benjamin Schwarz</td>
+                            <td>Systemanalyst</td>
+                            <td>IT</td>
+                            <td>b.schwarz@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>119</td>
+                            <td>Dr. Monika Krause</td>
+                            <td>Immunologin</td>
+                            <td>Projekt Frostline</td>
+                            <td>m.krause@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>120</td>
+                            <td>Daniel Braun</td>
+                            <td>Mechaniker</td>
+                            <td>Wartung</td>
+                            <td>d.braun@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>121</td>
+                            <td>Sabine Hofmann</td>
+                            <td>Rechtsanwältin</td>
+                            <td>Recht</td>
+                            <td>s.hofmann@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>122</td>
+                            <td>Dr. Torsten Lang</td>
+                            <td>Biotechnologe</td>
+                            <td>Labor West</td>
+                            <td>t.lang@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>123</td>
+                            <td>Christina Vogt</td>
+                            <td>Einkaufsmanagerin</td>
+                            <td>Logistik</td>
+                            <td>c.vogt@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>124</td>
+                            <td>Philipp Sommer</td>
+                            <td>Softwareentwickler</td>
+                            <td>IT</td>
+                            <td>p.sommer@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>125</td>
+                            <td>Dr. Andrea Keller</td>
+                            <td>Neurowissenschaftlerin</td>
+                            <td>Biomedizin</td>
+                            <td>a.keller@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>126</td>
+                            <td>Markus Jung</td>
+                            <td>Sicherheitstechniker</td>
+                            <td>Sicherheit</td>
+                            <td>m.jung@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>127</td>
+                            <td>Vanessa Lehmann</td>
+                            <td>Verwaltungsassistentin</td>
+                            <td>Verwaltung</td>
+                            <td>v.lehmann@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>128</td>
+                            <td>Dr. Günter Vogel</td>
+                            <td>Virologe</td>
+                            <td>Abteilung X7</td>
+                            <td>g.vogel@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>129</td>
+                            <td>Simone Richter</td>
+                            <td>Controllerin</td>
+                            <td>Finanzen</td>
+                            <td>s.richter2@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>130</td>
+                            <td>Jan Peters</td>
+                            <td>Datenbank-Administrator</td>
+                            <td>IT</td>
+                            <td>j.peters@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>131</td>
+                            <td>Dr. Heike Schmidt</td>
+                            <td>Pathologin</td>
+                            <td>Labor Ost</td>
+                            <td>h.schmidt@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>132</td>
+                            <td>Ralf Schneider</td>
+                            <td>Lagerverwalter</td>
+                            <td>Logistik</td>
+                            <td>r.schneider@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>133</td>
+                            <td>Anja Zimmermann</td>
+                            <td>Personalreferentin</td>
+                            <td>Personal</td>
+                            <td>a.zimmermann@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>134</td>
+                            <td>Dr. Uwe Herrmann</td>
+                            <td>Biochemiker</td>
+                            <td>Projekt Frostline</td>
+                            <td>u.herrmann@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>135</td>
+                            <td>Melanie Kaiser</td>
+                            <td>Sekretärin</td>
+                            <td>Leitung</td>
+                            <td>m.kaiser@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>136</td>
+                            <td>Tobias Müller</td>
+                            <td>IT-Support</td>
+                            <td>IT</td>
+                            <td>t.mueller@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>137</td>
+                            <td>Dr. Birgit Walter</td>
+                            <td>Mikrobiologin</td>
+                            <td>Labor West</td>
+                            <td>b.walter@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>138</td>
+                            <td>Christian Schulz</td>
+                            <td>Sicherheitsbeauftragter</td>
+                            <td>Sicherheit</td>
+                            <td>c.schulz@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>139</td>
+                            <td>Kerstin Engel</td>
+                            <td>Qualitätsmanagerin</td>
+                            <td>QM</td>
+                            <td>k.engel@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>140</td>
+                            <td>Dr. Jörg Roth</td>
+                            <td>Onkologe</td>
+                            <td>Biomedizin</td>
+                            <td>j.roth@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>141</td>
+                            <td>Stefanie Krüger</td>
+                            <td>Marketingmanagerin</td>
+                            <td>Marketing</td>
+                            <td>s.krueger@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>142</td>
+                            <td>Andreas Werner</td>
+                            <td>Technischer Zeichner</td>
+                            <td>Technik</td>
+                            <td>a.werner@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>143</td>
+                            <td>Dr. Susanne Lorenz</td>
+                            <td>Epidemiologin</td>
+                            <td>Abteilung X7</td>
+                            <td>s.lorenz@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>144</td>
+                            <td>Matthias Krause</td>
+                            <td>Energietechniker</td>
+                            <td>Technik</td>
+                            <td>m.krause2@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>145</td>
+                            <td>Jennifer Scholz</td>
+                            <td>Buchhalterin</td>
+                            <td>Finanzen</td>
+                            <td>j.scholz@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>146</td>
+                            <td>Dr. Dirk Albrecht</td>
+                            <td>Radiologe</td>
+                            <td>Labor Ost</td>
+                            <td>d.albrecht@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>147</td>
+                            <td>Nicole Frank</td>
+                            <td>Personalentwicklerin</td>
+                            <td>Personal</td>
+                            <td>n.frank@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>148</td>
+                            <td>Sven Bergmann</td>
+                            <td>Cloud-Administrator</td>
+                            <td>IT</td>
+                            <td>s.bergmann@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>149</td>
+                            <td>Dr. Kristin Mayer</td>
+                            <td>Zellbiologin</td>
+                            <td>Projekt Frostline</td>
+                            <td>k.mayer@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>150</td>
+                            <td>Patrick Berger</td>
+                            <td>Reinigungskraft</td>
+                            <td>Gebäudeverwaltung</td>
+                            <td>p.berger@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>151</td>
+                            <td>Daniela Stein</td>
+                            <td>Compliance-Beauftragte</td>
+                            <td>Recht</td>
+                            <td>d.stein@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>152</td>
+                            <td>Dr. Holger Fuchs</td>
+                            <td>Stammzellenforscher</td>
+                            <td>Biomedizin</td>
+                            <td>h.fuchs@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>153</td>
+                            <td>Manuela Huber</td>
+                            <td>Empfangsmitarbeiterin</td>
+                            <td>Verwaltung</td>
+                            <td>m.huber@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>154</td>
+                            <td>Dennis König</td>
+                            <td>Backup-Administrator</td>
+                            <td>IT</td>
+                            <td>d.koenig@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>155</td>
+                            <td>Dr. Sabrina Pohl</td>
+                            <td>Pharmakologin</td>
+                            <td>Labor West</td>
+                            <td>s.pohl@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>157</td>
+                            <td>Kevin Scholze</td>
+                            <td>Hausmeister</td>
+                            <td>Wartung</td>
+                            <td>k.scholze@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>158</td>
+                            <td>Marion Seidel</td>
+                            <td>Archivarin</td>
+                            <td>Verwaltung</td>
+                            <td>m.seidel@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>159</td>
+                            <td>Dr. Wolfgang Dietrich</td>
+                            <td>Klinischer Forscher</td>
+                            <td>Abteilung X7</td>
+                            <td>w.dietrich@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>160</td>
+                            <td>Tanja Ludwig</td>
+                            <td>Social Media Managerin</td>
+                            <td>Marketing</td>
+                            <td>t.ludwig@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>161</td>
+                            <td>Florian Baumann</td>
+                            <td>DevOps Engineer</td>
+                            <td>IT</td>
+                            <td>f.baumann@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>162</td>
+                            <td>Dr. Gabriele Horn</td>
+                            <td>Endokrinologin</td>
+                            <td>Biomedizin</td>
+                            <td>g.horn@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>163</td>
+                            <td>Bernd Möller</td>
+                            <td>Lagermitarbeiter</td>
+                            <td>Logistik</td>
+                            <td>b.moeller@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>164</td>
+                            <td>Yvonne Hahn</td>
+                            <td>Event-Managerin</td>
+                            <td>Marketing</td>
+                            <td>y.hahn@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>165</td>
+                            <td>Dr. Rainer Kühn</td>
+                            <td>Gewebeforscher</td>
+                            <td>Projekt Frostline</td>
+                            <td>r.kuehn@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>166</td>
+                            <td>Sonja Graf</td>
+                            <td>Einkaufsassistentin</td>
+                            <td>Logistik</td>
+                            <td>s.graf@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>167</td>
+                            <td>Mirko Weise</td>
+                            <td>Penetrationstester</td>
+                            <td>IT-Sicherheit</td>
+                            <td>m.weise@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>168</td>
+                            <td>Dr. Ines Schmitt</td>
+                            <td>Hämatologin</td>
+                            <td>Labor Ost</td>
+                            <td>i.schmitt@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>169</td>
+                            <td>Jens Winkler</td>
+                            <td>Fuhrparkleiter</td>
+                            <td>Logistik</td>
+                            <td>j.winkler@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>170</td>
+                            <td>Cornelia Schuster</td>
+                            <td>Datenschutzbeauftragte</td>
+                            <td>Recht</td>
+                            <td>c.schuster@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>171</td>
+                            <td>Dr. Axel Nowak</td>
+                            <td>Kardiologe</td>
+                            <td>Biomedizin</td>
+                            <td>a.nowak@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>172</td>
+                            <td>Petra Voigt</td>
+                            <td>Lohnbuchhalterin</td>
+                            <td>Finanzen</td>
+                            <td>p.voigt@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>173</td>
+                            <td>Lars Engel</td>
+                            <td>Webentwickler</td>
+                            <td>IT</td>
+                            <td>l.engel@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>174</td>
+                            <td>Dr. Ulrike Reinhardt</td>
+                            <td>Dermatologin</td>
+                            <td>Labor West</td>
+                            <td>u.reinhardt@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>175</td>
+                            <td>Fabian Bittner</td>
+                            <td>Wartungstechniker</td>
+                            <td>Wartung</td>
+                            <td>f.bittner@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>176</td>
+                            <td>Silke Werner</td>
+                            <td>Projektassistentin</td>
+                            <td>Verwaltung</td>
+                            <td>s.werner2@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>177</td>
+                            <td>Dr. Lothar Weidemann</td>
+                            <td>Neurologe</td>
+                            <td>Abteilung X7</td>
+                            <td>l.weidemann@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>178</td>
+                            <td>Heike Ritter</td>
+                            <td>PR-Managerin</td>
+                            <td>Marketing</td>
+                            <td>h.ritter@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>179</td>
+                            <td>Marco Friedrich</td>
+                            <td>Cybersecurity Analyst</td>
+                            <td>IT-Sicherheit</td>
+                            <td>m.friedrich@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>180</td>
+                            <td>Dr. Renate Seiler</td>
+                            <td>Orthopädin</td>
+                            <td>Biomedizin</td>
+                            <td>r.seiler@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>181</td>
+                            <td>Thorsten Böhm</td>
+                            <td>Lkw-Fahrer</td>
+                            <td>Logistik</td>
+                            <td>t.boehm@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>182</td>
+                            <td>Angelika Brand</td>
+                            <td>Kreditorenbuchhalterin</td>
+                            <td>Finanzen</td>
+                            <td>a.brand@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>183</td>
+                            <td>Dr. Norbert Günther</td>
+                            <td>Anästhesist</td>
+                            <td>Labor Ost</td>
+                            <td>n.guenther@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>184</td>
+                            <td>Bianca Krämer</td>
+                            <td>Trainee</td>
+                            <td>Personal</td>
+                            <td>b.kraemer@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>185</td>
+                            <td>Sebastian Henkel</td>
+                            <td>Mobile Developer</td>
+                            <td>IT</td>
+                            <td>s.henkel@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>186</td>
+                            <td>Dr. Karin Franke</td>
+                            <td>Ophthalmologin</td>
+                            <td>Labor West</td>
+                            <td>k.franke@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>187</td>
+                            <td>Holger Ziegler</td>
+                            <td>Gebäudereiniger</td>
+                            <td>Gebäudeverwaltung</td>
+                            <td>h.ziegler@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>188</td>
+                            <td>Ute Jahnke</td>
+                            <td>Controlling-Assistentin</td>
+                            <td>Finanzen</td>
+                            <td>u.jahnke@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>189</td>
+                            <td>Dr. Gerd Meier</td>
+                            <td>Urologe</td>
+                            <td>Biomedizin</td>
+                            <td>g.meier@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>190</td>
+                            <td>Anja Wegner</td>
+                            <td>Content-Managerin</td>
+                            <td>Marketing</td>
+                            <td>a.wegner@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>191</td>
+                            <td>Viktor Behrens</td>
+                            <td>Security Engineer</td>
+                            <td>IT-Sicherheit</td>
+                            <td>v.behrens@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>192</td>
+                            <td>Dr. Margit Jäger</td>
+                            <td>Gynäkologin</td>
+                            <td>Labor Ost</td>
+                            <td>m.jaeger@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>193</td>
+                            <td>Rainer Lehmann</td>
+                            <td>Pförtner</td>
+                            <td>Sicherheit</td>
+                            <td>r.lehmann@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>194</td>
+                            <td>Gisela Thiele</td>
+                            <td>Debitorenbuchhalterin</td>
+                            <td>Finanzen</td>
+                            <td>g.thiele@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>195</td>
+                            <td>Dr. Ernst Kohl</td>
+                            <td>Chirurg</td>
+                            <td>Projekt Frostline</td>
+                            <td>e.kohl@vanterra.com</td>
+                            <td>Level 4</td>
+                        </tr>
+                        <tr>
+                            <td>196</td>
+                            <td>Nadine Barthel</td>
+                            <td>Junior Researcherin</td>
+                            <td>Labor West</td>
+                            <td>n.barthel@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>197</td>
+                            <td>Dirk Ackermann</td>
+                            <td>Frontend Developer</td>
+                            <td>IT</td>
+                            <td>d.ackermann@vanterra.com</td>
+                            <td>Level 2</td>
+                        </tr>
+                        <tr>
+                            <td>198</td>
+                            <td>Dr. Irmgard Stahl</td>
+                            <td>Psychiaterin</td>
+                            <td>Abteilung X7</td>
+                            <td>i.stahl@vanterra.com</td>
+                            <td>Level 3</td>
+                        </tr>
+                        <tr>
+                            <td>199</td>
+                            <td>Egon Haase</td>
+                            <td>Elektriker</td>
+                            <td>Wartung</td>
+                            <td>e.haase@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                        <tr>
+                            <td>200</td>
+                            <td>Brigitte Wolff</td>
+                            <td>Telefonistin</td>
+                            <td>Verwaltung</td>
+                            <td>b.wolff@vanterra.com</td>
+                            <td>Level 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
+                    <strong>⚠️ Sicherheitshinweis:</strong>
+                    <p>Diese Informationen sind streng vertraulich. Unbefugte Weitergabe wird strafrechtlich verfolgt.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Prüfe ob Admin eingeloggt ist
+        window.onload = function() {
+            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+                document.getElementById('employeeContent').style.display = 'block';
+                document.getElementById('accessDenied').style.display = 'none';
+            } else {
+                document.getElementById('employeeContent').style.display = 'none';
+                document.getElementById('accessDenied').style.display = 'block';
+            }
+        }
+    </script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
