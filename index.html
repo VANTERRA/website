@@ -5,14 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VANTERRA - Innovation für eine bessere Zukunft</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ...existing code... */
+
+        #secretDownloadBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            display: none;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        #secretDownloadBtn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <img src="vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
                 <span class="logo-text">VANTERRA</span>
                 <span class="logo-tagline">Research & Development</span>
             </div>
@@ -84,6 +122,37 @@
             </div>
         </div>
     </footer>
+
+    <button id="secretDownloadBtn" onclick="downloadAkte()">U͟n͠s̷e͜r͢e͘ Ze̶i͞t̷u͜n̛g͝s͠a̸r̷t͟i̵k͢e͡l̷</button>
+
+    <script>
+        // Geheime Tastenkombination: Strg + Shift + E
+        document.addEventListener('keydown', function (event) {
+            if (event.ctrlKey && event.shiftKey && event.key === 'E') {
+                event.preventDefault();
+                const btn = document.getElementById('secretDownloadBtn');
+                if (btn.style.display === 'none' || btn.style.display === '') {
+                    btn.style.display = 'block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            }
+        });
+
+        function downloadAkte() {
+            const link = document.createElement('a');
+            link.href = 'documents/Zeitungsartikel.pdf';
+            link.download = 'Zeitungsartikel.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Optional: Button nach Download ausblenden
+            setTimeout(() => {
+                document.getElementById('secretDownloadBtn').style.display = 'none';
+            }, 2000);
+        }
+    </script>
 </body>
 
 </html>

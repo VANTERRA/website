@@ -276,7 +276,7 @@ function updatePlayer() {
 
     // Prüfe Fallen
     if (checkTrapCollision()) {
-        alert('💀 Game Over! Du hast eine Falle berührt!');
+        alert('💀 Game Over! Du hast die Firewall berührt!');
         player.x = 30;
         player.y = 30;
         return;
@@ -285,11 +285,10 @@ function updatePlayer() {
     // Prüfe ob Ziel erreicht
     if (checkGoal()) {
         if (currentLevel < 2) {
-            alert(`🎉 Level ${currentLevel} geschafft! Weiter zu Level ${currentLevel + 1}`);
+            alert(`🎉 Ebene ${currentLevel} geschafft! Weiter zu Level ${currentLevel + 1}`);
             loadLevel(currentLevel + 1);
         } else {
-            alert('🏆 Glückwunsch! Du hast alle Level geschafft!');
-            loadLevel(1);
+            alert('🏆 Glückwunsch! Du hast die Firewall geknackt! Das Passwort für den Adminbereich ist: C1rv0n!X24');
         }
     }
 }

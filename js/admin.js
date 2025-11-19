@@ -22,6 +22,14 @@ function handleLogout() {
     document.getElementById('password').value = '';
 }
 
+function navigateToDateien() {
+    if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+        window.location.href = 'dateien.html';
+    } else {
+        window.location.href = 'admin.html';
+    }
+}
+
 // Prüfe ob bereits eingeloggt
 window.onload = function () {
     if (sessionStorage.getItem('adminLoggedIn') === 'true') {

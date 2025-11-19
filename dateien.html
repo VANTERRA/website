@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dateiverwaltung - VANTERRA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .files-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+        }
+
+        .file-item {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .file-icon {
+            font-size: 40px;
+            margin-right: 15px;
+            color: #e74c3c;
+        }
+
+        .file-info h3 {
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+        }
+
+        .file-info p {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .password-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .password-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .password-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .password-input button {
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .password-input button:hover {
+            background: #34495e;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: #34495e;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="dateienContent" style="display: none;">
+        <div class="container">
+            <section class="page-header">
+                <h1>Dateiverwaltung</h1>
+                <p>Geschützte Dateien des Admin-Bereichs</p>
+            </section>
+
+            <div class="files-container">
+                <a href="admin.html" class="back-button">← Zurück zum Admin-Bereich</a>
+
+                <div class="file-item">
+                    <div class="file-header">
+                        <div class="file-icon">📄</div>
+                        <div class="file-info">
+                            <h3>AKTE.pdf</h3>
+                            <p>Vertrauliches Dokument | PDF-Datei</p>
+                        </div>
+                    </div>
+
+                    <div class="password-section">
+                        <p><strong>Passwort erforderlich zum Download:</strong></p>
+                        <div class="password-input">
+                            <input type="password" id="pdfPassword" placeholder="Passwort eingeben">
+                            <button onclick="downloadPDF()">Download</button>
+                        </div>
+                        <p class="error-message" id="passwordError">Falsches Passwort!</p>
+                        <p class="success-message" id="downloadSuccess">Download wird gestartet...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Prüfe ob eingeloggt, sonst zurück zur Admin-Login-Seite
+        window.onload = function () {
+            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+                document.getElementById('dateienContent').style.display = 'block';
+            } else {
+                window.location.href = 'admin.html';
+            }
+        }
+
+        function downloadPDF() {
+            const password = document.getElementById('pdfPassword').value;
+            const errorMsg = document.getElementById('passwordError');
+            const successMsg = document.getElementById('downloadSuccess');
+
+            // Verstecke vorherige Nachrichten
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            // Passwort prüfen (verwende dasselbe wie Admin-Login)
+            if (password === 'C1rv0n!X24') {
+                // Zeige Erfolgsmeldung
+                successMsg.style.display = 'block';
+
+                // Starte PDF-Download
+                setTimeout(() => {
+                    const link = document.createElement('a');
+                    link.href = 'documents/AKTE.pdf';
+                    link.download = 'AKTE.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Lösche Passwort-Feld
+                    document.getElementById('pdfPassword').value = '';
+
+                    // Verstecke Erfolgsmeldung nach 3 Sekunden
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 3000);
+                }, 500);
+            } else {
+                // Zeige Fehlermeldung
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        // Enter-Taste zum Download
+        document.addEventListener('DOMContentLoaded', function () {
+            const passwordInput = document.getElementById('pdfPassword');
+            if (passwordInput) {
+                passwordInput.addEventListener('keypress', function (event) {
+                    if (event.key === 'Enter') {
+                        downloadPDF();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
