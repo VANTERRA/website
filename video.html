@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dateiverwaltung - VANTERRA</title>
+    <title>Video - VANTERRA</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
         .files-container {
@@ -17,7 +17,7 @@
             background: #fff;
             border: 1px solid #ddd;
             border-radius: 8px;
-            padding: 20px;
+            padding: 30px;
             margin: 20px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
@@ -25,22 +25,19 @@
         .file-header {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .file-icon {
-            font-size: 40px;
-            margin-right: 15px;
+            font-size: 50px;
+            margin-right: 20px;
             color: #e74c3c;
-        }
-
-        .file-icon.video {
-            color: #3498db;
         }
 
         .file-info h3 {
             margin: 0 0 5px 0;
             color: #2c3e50;
+            font-size: 22px;
         }
 
         .file-info p {
@@ -49,9 +46,32 @@
             font-size: 14px;
         }
 
+        .file-list {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .file-list h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .file-list ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .file-list li {
+            color: #555;
+            margin: 5px 0;
+        }
+
         .password-section {
-            margin-top: 15px;
-            padding-top: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
             border-top: 1px solid #eee;
         }
 
@@ -63,18 +83,20 @@
 
         .password-input input {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 14px;
         }
 
         .password-input button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background: #2c3e50;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .password-input button:hover {
@@ -108,20 +130,6 @@
         .back-button:hover {
             background: #34495e;
         }
-
-        .view-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-top: 10px;
-        }
-
-        .view-button:hover {
-            background: #2980b9;
-        }
     </style>
 </head>
 
@@ -141,11 +149,11 @@
         </div>
     </nav>
 
-    <div id="dateienContent" style="display: none;">
+    <div id="videoContent" style="display: none;">
         <div class="container">
             <section class="page-header">
-                <h1>Dateiverwaltung</h1>
-                <p>Geschützte Dateien des Admin-Bereichs</p>
+                <h1>Videodateien</h1>
+                <p>Geschützte Videos des Admin-Bereichs</p>
             </section>
 
             <div class="files-container">
@@ -153,36 +161,28 @@
 
                 <div class="file-item">
                     <div class="file-header">
-                        <div class="file-icon">📄</div>
+                        <div class="file-icon">📹</div>
                         <div class="file-info">
-                            <h3>AKTE.pdf</h3>
-                            <p>Vertrauliches Dokument | PDF-Datei</p>
+                            <h3>Vertrauliche Dateien</h3>
+                            <p>Video</p>
                         </div>
+                    </div>
+
+                    <div class="file-list">
+                        <h4>Folgende Dateien werden heruntergeladen:</h4>
+                        <ul>
+                            <li>📹 Ohne Titel.mp4</li>
+                        </ul>
                     </div>
 
                     <div class="password-section">
                         <p><strong>Passwort erforderlich zum Download:</strong></p>
                         <div class="password-input">
-                            <input type="password" id="pdfPassword" placeholder="Passwort eingeben">
-                            <button onclick="downloadPDF()">Download</button>
+                            <input type="password" id="downloadPassword" placeholder="Passwort eingeben">
+                            <button onclick="downloadFiles()">Download starten</button>
                         </div>
                         <p class="error-message" id="passwordError">Falsches Passwort!</p>
-                        <p class="success-message" id="downloadSuccess">Download wird gestartet...</p>
-                    </div>
-                </div>
-
-                <div class="file-item">
-                    <div class="file-header">
-                        <div class="file-icon video">🎥</div>
-                        <div class="file-info">
-                            <h3>Video</h3>
-                            <p>Sicherheitsaufnahme | Video-Datei</p>
-                        </div>
-                    </div>
-
-                    <div class="password-section">
-                        <p><strong>Zugriff auf Überwachungsmaterial:</strong></p>
-                        <a href="video.html" class="view-button">Video ansehen</a>
+                        <p class="success-message" id="downloadSuccess">Downloads werden gestartet...</p>
                     </div>
                 </div>
             </div>
@@ -208,14 +208,14 @@
         // Prüfe ob eingeloggt, sonst zurück zur Admin-Login-Seite
         window.onload = function () {
             if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-                document.getElementById('dateienContent').style.display = 'block';
+                document.getElementById('videoContent').style.display = 'block';
             } else {
                 window.location.href = 'admin.html';
             }
         }
 
-        function downloadPDF() {
-            const password = document.getElementById('pdfPassword').value;
+        function downloadFiles() {
+            const password = document.getElementById('downloadPassword').value;
             const errorMsg = document.getElementById('passwordError');
             const successMsg = document.getElementById('downloadSuccess');
 
@@ -223,22 +223,33 @@
             errorMsg.style.display = 'none';
             successMsg.style.display = 'none';
 
-            // Passwort prüfen (verwende dasselbe wie Admin-Login)
-            if (password === 'C1rv0n!X24') {
+            // Passwort prüfen
+            if (password === 'DeltaChimera09!') {
                 // Zeige Erfolgsmeldung
                 successMsg.style.display = 'block';
 
-                // Starte PDF-Download
+                // Starte Downloads nacheinander
                 setTimeout(() => {
-                    const link = document.createElement('a');
-                    link.href = 'documents/AKTE.pdf';
-                    link.download = 'AKTE.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
+                    // Download Video
+                    const linkVideo = document.createElement('a');
+                    linkVideo.href = 'assets/Ohne Titel.mp4';
+                    linkVideo.download = 'Ohne Titel.mp4';
+                    document.body.appendChild(linkVideo);
+                    linkVideo.click();
+                    document.body.removeChild(linkVideo);
+
+                    // Download Anweisung nach kurzer Verzögerung
+                    setTimeout(() => {
+                        const linkImage = document.createElement('a');
+                        linkImage.href = 'assets/anweisungVideo.png';
+                        linkImage.download = 'anweisungVideo.png';
+                        document.body.appendChild(linkImage);
+                        linkImage.click();
+                        document.body.removeChild(linkImage);
+                    }, 500);
 
                     // Lösche Passwort-Feld
-                    document.getElementById('pdfPassword').value = '';
+                    document.getElementById('downloadPassword').value = '';
 
                     // Verstecke Erfolgsmeldung nach 3 Sekunden
                     setTimeout(() => {
@@ -253,11 +264,11 @@
 
         // Enter-Taste zum Download
         document.addEventListener('DOMContentLoaded', function () {
-            const passwordInput = document.getElementById('pdfPassword');
+            const passwordInput = document.getElementById('downloadPassword');
             if (passwordInput) {
                 passwordInput.addEventListener('keypress', function (event) {
                     if (event.key === 'Enter') {
-                        downloadPDF();
+                        downloadFiles();
                     }
                 });
             }

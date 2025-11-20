@@ -6,17 +6,32 @@ document.addEventListener('DOMContentLoaded', function () {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Simuliere Formular-Übermittlung
+            // Sammle Formulardaten
             const formData = new FormData(contactForm);
             const data = {};
             formData.forEach((value, key) => {
                 data[key] = value;
             });
 
-            console.log('Formulardaten:', data);
+            // Easter Egg: Prüfe auf spezielle Eingaben
+            const specialName = 'Wolfgang Dietrich';
+            const specialMessage = 'Video Chimera';
 
-            // Zeige Bestätigungsnachricht
-            alert('Vielen Dank für Ihre Nachricht. Ein Mitarbeiter von VANTERRA wird sich in Kürze bei Ihnen melden.\n\nBitte beachten Sie: Alle Kommunikation wird überwacht und protokolliert.');
+            if (data.name === specialName && data.message.includes(specialMessage)) {
+                console.log('%c🔓 GEHEIMER VIDEOZUGANG ERKANNT', 'color: #00ff00; font-size: 18px; font-weight: bold;');
+                console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #00ff00;');
+                console.log('%cZugangsdaten für das verschlüsselte Video:', 'color: #00ff00; font-size: 14px;');
+                console.log('%cPasswort: DeltaChimera09!', 'color: #ffff00; font-size: 16px; font-weight: bold; background: #000; padding: 5px;');
+                console.log('%cHinweis: Dieses Passwort gewährt Zugang zu geheimen Aufzeichnugen.', 'color: #ff9900; font-size: 12px;');
+                console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #00ff00;');
+
+                alert('Nachricht empfangen. Prüfen Sie die Entwicklerkonsole für weitere Informationen.');
+            } else {
+                console.log('Formulardaten:', data);
+
+                // Zeige normale Bestätigungsnachricht
+                alert('Vielen Dank für Ihre Nachricht. Ein Mitarbeiter von VANTERRA wird sich in Kürze bei Ihnen melden.\n\nBitte beachten Sie: Alle Kommunikation wird überwacht und protokolliert.');
+            }
 
             contactForm.reset();
         });

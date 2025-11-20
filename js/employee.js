@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const logoutBtn = document.getElementById('logoutBtn');
 
     // Passwort (kann später geändert werden)
-    const correctPassword = 'Zugangsdaten';
+    const correctPassword = 'zugangsdaten';
 
     // Prüfe ob bereits eingeloggt
     if (sessionStorage.getItem('employeeLoggedIn') === 'true') {
