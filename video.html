@@ -117,6 +117,41 @@
             display: none;
         }
 
+        .video-link-section {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            border: 2px solid #27ae60;
+        }
+
+        .video-link-section h4 {
+            color: #27ae60;
+            margin: 0 0 15px 0;
+        }
+
+        .video-link-section a {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #27ae60;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .video-link-section a:hover {
+            background: #229954;
+        }
+
+        .video-link-section p {
+            margin: 10px 0 0 0;
+            color: #555;
+            font-size: 14px;
+        }
+
         .back-button {
             display: inline-block;
             padding: 12px 24px;
@@ -164,25 +199,35 @@
                         <div class="file-icon">📹</div>
                         <div class="file-info">
                             <h3>Vertrauliche Dateien</h3>
-                            <p>Video</p>
+                            <p>Video & Anweisungen</p>
                         </div>
                     </div>
 
                     <div class="file-list">
-                        <h4>Folgende Dateien werden heruntergeladen:</h4>
+                        <h4>Folgende Dateien sind verfügbar:</h4>
                         <ul>
-                            <li>📹 Ohne Titel.mp4</li>
+                            <li>📹 Ohne Titel.mp4 (Google Drive Link)</li>
+                            <li>📄 anweisungVideo.png (Download)</li>
                         </ul>
                     </div>
 
                     <div class="password-section">
-                        <p><strong>Passwort erforderlich zum Download:</strong></p>
+                        <p><strong>Passwort erforderlich zum Zugriff:</strong></p>
                         <div class="password-input">
                             <input type="password" id="downloadPassword" placeholder="Passwort eingeben">
-                            <button onclick="downloadFiles()">Download starten</button>
+                            <button onclick="unlockFiles()">Freischalten</button>
                         </div>
                         <p class="error-message" id="passwordError">Falsches Passwort!</p>
-                        <p class="success-message" id="downloadSuccess">Downloads werden gestartet...</p>
+                        <p class="success-message" id="downloadSuccess">Zugriff gewährt! Download wird gestartet...</p>
+                    </div>
+
+                    <div class="video-link-section" id="videoLinkSection">
+                        <h4>✅ Zugriff erfolgreich!</h4>
+                        <a href="https://drive.google.com/file/d/1Mg9hNCRADKjtsoi1fS8hzEW0HjpRI89I/view?usp=sharing"
+                            target="_blank">
+                            📹 Video auf Google Drive ansehen
+                        </a>
+                        <p>Die Anweisungsdatei wurde automatisch heruntergeladen.</p>
                     </div>
                 </div>
             </div>
@@ -214,47 +259,39 @@
             }
         }
 
-        function downloadFiles() {
+        function unlockFiles() {
             const password = document.getElementById('downloadPassword').value;
             const errorMsg = document.getElementById('passwordError');
             const successMsg = document.getElementById('downloadSuccess');
+            const videoLinkSection = document.getElementById('videoLinkSection');
 
             // Verstecke vorherige Nachrichten
             errorMsg.style.display = 'none';
             successMsg.style.display = 'none';
+            videoLinkSection.style.display = 'none';
 
             // Passwort prüfen
             if (password === 'DeltaChimera09!') {
                 // Zeige Erfolgsmeldung
                 successMsg.style.display = 'block';
 
-                // Starte Downloads nacheinander
+                // Starte Download der Anweisung
                 setTimeout(() => {
-                    // Download Video
-                    const linkVideo = document.createElement('a');
-                    linkVideo.href = 'assets/Ohne Titel.mp4';
-                    linkVideo.download = 'Ohne Titel.mp4';
-                    document.body.appendChild(linkVideo);
-                    linkVideo.click();
-                    document.body.removeChild(linkVideo);
+                    const linkImage = document.createElement('a');
+                    linkImage.href = 'assets/anweisungVideo.png';
+                    linkImage.download = 'anweisungVideo.png';
+                    document.body.appendChild(linkImage);
+                    linkImage.click();
+                    document.body.removeChild(linkImage);
 
-                    // Download Anweisung nach kurzer Verzögerung
+                    // Zeige Video-Link
                     setTimeout(() => {
-                        const linkImage = document.createElement('a');
-                        linkImage.href = 'assets/anweisungVideo.png';
-                        linkImage.download = 'anweisungVideo.png';
-                        document.body.appendChild(linkImage);
-                        linkImage.click();
-                        document.body.removeChild(linkImage);
-                    }, 500);
+                        successMsg.style.display = 'none';
+                        videoLinkSection.style.display = 'block';
+                    }, 1500);
 
                     // Lösche Passwort-Feld
                     document.getElementById('downloadPassword').value = '';
-
-                    // Verstecke Erfolgsmeldung nach 3 Sekunden
-                    setTimeout(() => {
-                        successMsg.style.display = 'none';
-                    }, 3000);
                 }, 500);
             } else {
                 // Zeige Fehlermeldung
@@ -262,13 +299,13 @@
             }
         }
 
-        // Enter-Taste zum Download
+        // Enter-Taste zum Freischalten
         document.addEventListener('DOMContentLoaded', function () {
             const passwordInput = document.getElementById('downloadPassword');
             if (passwordInput) {
                 passwordInput.addEventListener('keypress', function (event) {
                     if (event.key === 'Enter') {
-                        downloadFiles();
+                        unlockFiles();
                     }
                 });
             }
