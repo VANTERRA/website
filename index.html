@@ -43,6 +43,40 @@
                 transform: translateY(0);
             }
         }
+
+        #timedSecretBtn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            display: none;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        #timedSecretBtn:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 4px 25px rgba(102, 126, 234, 0.8);
+            }
+        }
     </style>
 </head>
 
@@ -118,12 +152,16 @@
                     <h4>Intern</h4>
                     <p><a href="employee.html" class="footer-link">Mitarbeiterbereich</a></p>
                     <p><a href="admin.html" class="footer-link">Admin-Bereich</a></p>
+                    <p id="hausmeisterLink" style="display: none;"><a href="hausmeister.html"
+                            class="footer-link">Hausmeister</a>
+                    </p>
                 </div>
             </div>
         </div>
     </footer>
 
     <button id="secretDownloadBtn" onclick="downloadAkte()">U͟n͠s̷e͜r͢e͘ Ze̶i͞t̷u͜n̛g͝s͠a̸r̷t͟i̵k͢e͡l̷</button>
+    <button id="timedSecretBtn" onclick="downloadTimedDocument()">N◘ch z≋ v e r n i ▞ h t e n</button>
 
     <script>
         // Geheime Tastenkombination: Strg + Shift + E
@@ -152,6 +190,59 @@
                 document.getElementById('secretDownloadBtn').style.display = 'none';
             }, 2000);
         }
+
+        function downloadTimedDocument() {
+            const link = document.createElement('a');
+            link.href = 'documents/PRESSEERKLÄRUNG.pdf'; // Passe den Pfad an deine PDF an
+            link.download = 'PRESSEERKLÄRUNG.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Optional: Button nach Download ausblenden
+            setTimeout(() => {
+                document.getElementById('timedSecretBtn').style.display = 'none';
+            }, 2000);
+        }
+
+        // Zeitgesteuerter Button - nur am 5.12.2025 von 19-20 Uhr
+        function checkTimedButton() {
+            const now = new Date();
+            const targetDate = new Date('2025-12-05');
+
+            // Prüfe ob es der 5. Dezember 2025 ist
+            const isCorrectDate = now.getFullYear() === 2025 &&
+                now.getMonth() === 11 && // Dezember = 11 (0-basiert)
+                now.getDate() === 5;
+
+            // Prüfe ob es zwischen 19:00 und 20:00 Uhr ist
+            const currentHour = now.getHours();
+            const isCorrectTime = currentHour === 19;
+
+            const timedBtn = document.getElementById('timedSecretBtn');
+
+            if (isCorrectDate && isCorrectTime) {
+                timedBtn.style.display = 'block';
+            } else {
+                timedBtn.style.display = 'none';
+            }
+        }
+
+        // Prüfe beim Laden
+        checkTimedButton();
+
+        // Prüfe jede Minute, ob der Button angezeigt werden soll
+        setInterval(checkTimedButton, 60000); // Alle 60 Sekunden
+
+        // Zeige Hausmeister-Link wenn Mitarbeiter eingeloggt
+        window.addEventListener('load', function () {
+            if (sessionStorage.getItem('employeeLoggedIn') === 'true') {
+                const hausmeisterLink = document.getElementById('hausmeisterLink');
+                if (hausmeisterLink) {
+                    hausmeisterLink.style.display = 'block';
+                }
+            }
+        });
     </script>
 </body>
 

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekte - Admin - VANTERRA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .projects-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3498db;
+        }
+
+        .project-card.classified {
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #fff 0%, #ffe6e6 100%);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .project-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-public {
+            background: #27ae60;
+            color: white;
+        }
+
+        .badge-classified {
+            background: #e74c3c;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .project-code {
+            font-family: 'Courier New', monospace;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #555;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .meta-value {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .classified-info {
+            background: #ffebee;
+            border-left: 4px solid #c62828;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .section-divider {
+            margin: 50px 0 30px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-divider h2 {
+            background: #f8f9fa;
+            display: inline-block;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #dee2e6;
+        }
+
+        .access-denied {
+            display: none;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: #34495e;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="accessDenied" class="access-denied">
+            <h1>🔒 Zugriff verweigert</h1>
+            <p>Sie haben keine Berechtigung für diese Seite.</p>
+            <a href="admin.html" class="back-button">Zum Login</a>
+        </div>
+
+        <div id="projectsContent" style="display: none;">
+            <section class="page-header">
+                <h1>🔬 Projektübersicht</h1>
+                <p>Alle aktiven Forschungsprojekte - Vertraulich</p>
+            </section>
+
+            <section class="content-section">
+                <a href="admin.html" class="back-button">← Zurück zum Admin-Bereich</a>
+
+                <div class="warning-box">
+                    <strong>⚠️ Sicherheitshinweis:</strong>
+                    Diese Seite enthält hochsensible Informationen. Klassifizierte Projekte dürfen nur von autorisiertem
+                    Personal mit entsprechender Sicherheitsfreigabe eingesehen werden.
+                </div>
+
+                <!-- Öffentliche/Harmlose Projekte -->
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <div class="project-code">PROJ-2024-001</div>
+                                <div class="project-title">Grüne Energie Initiative</div>
+                            </div>
+                            <span class="project-badge badge-public">Öffentlich</span>
+                        </div>
+                        <div class="project-description">
+                            Entwicklung nachhaltiger Energielösungen für Laboreinrichtungen. Fokus auf Solarenergie und
+                            Energieeffizienz. Kooperation mit mehreren Universitäten.
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Projektleiter</span>
+                                <span class="meta-value">Dr. Anna Schmidt</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status</span>
+                                <span class="meta-value">Aktiv - 67% abgeschlossen</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Budget</span>
+                                <span class="meta-value">2,3 Mio. €</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Sicherheitsstufe</span>
+                                <span class="meta-value">Level 1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <div class="project-code">PROJ-2024-003</div>
+                                <div class="project-title">BioTech Agrar</div>
+                            </div>
+                            <span class="project-badge badge-public">Öffentlich</span>
+                        </div>
+                        <div class="project-description">
+                            Forschung zur Verbesserung von Pflanzenwachstum durch biologische Optimierung. Ziel ist die
+                            Entwicklung resistenterer Nutzpflanzen für schwierige Klimabedingungen.
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Projektleiter</span>
+                                <span class="meta-value">Dr. Johann Weber</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status</span>
+                                <span class="meta-value">Aktiv - 42% abgeschlossen</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Budget</span>
+                                <span class="meta-value">1,8 Mio. €</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Sicherheitsstufe</span>
+                                <span class="meta-value">Level 1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <div class="project-code">PROJ-2024-007</div>
+                                <div class="project-title">MediScan 3D</div>
+                            </div>
+                            <span class="project-badge badge-public">Öffentlich</span>
+                        </div>
+                        <div class="project-description">
+                            Entwicklung fortschrittlicher 3D-Bildgebungsverfahren für die medizinische Diagnostik.
+                            Verbesserung der Früherkennung von Krankheiten durch KI-gestützte Analyse.
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Projektleiter</span>
+                                <span class="meta-value">Dr. Michael Brenner</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status</span>
+                                <span class="meta-value">Aktiv - 85% abgeschlossen</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Budget</span>
+                                <span class="meta-value">3,1 Mio. €</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Sicherheitsstufe</span>
+                                <span class="meta-value">Level 2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Klassifizierte Projekte -->
+                <div class="section-divider">
+                    <h2>🔒 KLASSIFIZIERTE PROJEKTE - NUR FÜR AUTORISIERTES PERSONAL</h2>
+                </div>
+
+                <div class="classified-info">
+                    <strong>⚠️ WARNUNG - STRENG VERTRAULICH</strong>
+                    <p>Die folgenden Projekte unterliegen höchster Geheimhaltungsstufe. Unbefugter Zugriff, Verbreitung
+                        oder Diskussion dieser Informationen wird strafrechtlich verfolgt und führt zur sofortigen
+                        Kündigung sowie rechtlichen Konsequenzen.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card classified">
+                        <div class="project-header">
+                            <div>
+                                <div class="project-code">FROST-23-ALPHA</div>
+                                <div class="project-title">Projekt Frostline</div>
+                            </div>
+                            <span class="project-badge badge-classified">oberste Sicherheitsstufe</span>
+                        </div>
+                        <div class="project-description">
+                            Auf diese Informationen haben Sie keinen Zugriff. Diese sind streng vertrauliche Daten und
+                            nur der Vorstand hat darauf Zugriff.
+                            <br><br>
+                            <strong>Status:</strong> Es gibt keine Probleme.
+                            Projekt läuft unter direkter Aufsicht von Dr. Emil Carvon.
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Projektleiter</span>
+                                <span class="meta-value">■■■■■■</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status</span>
+                                <span class="meta-value">■■■■■</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Budget</span>
+                                <span class="meta-value">KLASSIFIZIERT</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Sicherheitsstufe</span>
+                                <span class="meta-value">Level 5 (Höchste)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card classified">
+                        <div class="project-header">
+                            <div>
+                                <div class="project-code">NEXUS-X7-2024</div>
+                                <div class="project-title">Abteilung X7 - Neural Nexus</div>
+                            </div>
+                            <span class="project-badge badge-classified">Streng Geheim</span>
+                        </div>
+                        <div class="project-description">
+                            Entwicklung neuronaler Schnittstellen zur direkten Gehirn-Computer-Interaktion. Experimente
+                            mit Gedächtnismanipulation und kognitiver Verbesserung. Phase 3 Versuche laufen in
+                            abgeschirmtem Labor, Untergeschoss B3.
+                            <br><br>
+                            <strong>Status:</strong> Teilnehmer berichten von unerwarteten Nebenwirkungen. Projekt wird
+                            trotz Bedenken fortgesetzt.
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Projektleiter</span>
+                                <span class="meta-value">Dr. Petra Hoffmann</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status</span>
+                                <span class="meta-value">Phase 3 - Humanversuche</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Budget</span>
+                                <span class="meta-value">KLASSIFIZIERT</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Sicherheitsstufe</span>
+                                <span class="meta-value">Level 4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card classified">
+                        <div class="project-header">
+                            <div>
+                                <div class="project-code">CHIMERA-DELTA-09</div>
+                                <div class="project-title">Projekt Chimera</div>
+                            </div>
+                            <span class="project-badge badge-classified">Streng Geheim</span>
+                        </div>
+                        <div class="project-description">
+                            Genetische Modifikation zur Erzeugung hybrider Zellstrukturen mit erhöhter
+                            Regenerationsfähigkeit. Kombination verschiedener DNA-Sequenzen aus unterschiedlichen
+                            Spezies. Versuche werden in Hochsicherheitslabor C durchgeführt.
+                            <br><br>
+                            <strong>Hinweis:</strong> Projekt verstößt möglicherweise gegen internationale
+                            Bioethik-Richtlinien. Strenge Geheimhaltung erforderlich.
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Projektleiter</span>
+                                <span class="meta-value">Dr. Günter Vogel</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status</span>
+                                <span class="meta-value">Experimentell - Tier-Trials</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Budget</span>
+                                <span class="meta-value">KLASSIFIZIERT</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Sicherheitsstufe</span>
+                                <span class="meta-value">Level 4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card classified">
+                        <div class="project-header">
+                            <div>
+                                <div class="project-code">PROMETHEUS-88</div>
+                                <div class="project-title">Projekt Prometheus</div>
+                            </div>
+                            <span class="project-badge badge-classified">Streng Geheim</span>
+                        </div>
+                        <div class="project-description">
+                            Entwicklung synthetischer Organismen für extreme Umgebungen. Forschung an künstlichen
+                            Lebensformen, die in lebensfeindlichen Bedingungen überleben können. Potenzielle
+                            militärische Anwendungen.
+                            <br><br>
+                            <strong>Kritisch:</strong> Projekt wurde mehrfach von Ethikkommission abgelehnt. Läuft unter
+                            direkter Anweisung der Geschäftsleitung weiter. Zugang nur mit Sondergenehmigung.
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Projektleiter</span>
+                                <span class="meta-value">Dr. Emil Carvon (Direkt)</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status</span>
+                                <span class="meta-value">Hochgeheim - Aktiv</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Budget</span>
+                                <span class="meta-value">KLASSIFIZIERT</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Sicherheitsstufe</span>
+                                <span class="meta-value">Level 5 (Höchste)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="classified-info" style="margin-top: 40px;">
+                    <strong>📋 ZUGRIFFSPROTOKOLL</strong>
+                    <p>Ihr Zugriff auf diese Seite wurde automatisch protokolliert und an die Sicherheitsabteilung
+                        gemeldet. Datum: <span id="accessDate"></span> | IP: [PROTOKOLLIERT]</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Prüfe ob Admin eingeloggt ist
+        window.onload = function () {
+            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+                document.getElementById('projectsContent').style.display = 'block';
+                document.getElementById('accessDenied').style.display = 'none';
+
+                // Setze aktuelles Datum
+                const now = new Date();
+                document.getElementById('accessDate').textContent = now.toLocaleString('de-DE');
+            } else {
+                document.getElementById('projectsContent').style.display = 'none';
+                document.getElementById('accessDenied').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sicherheitsprotokoll - VANTERRA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .security-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 40px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 2px solid #e74c3c;
+        }
+
+        .security-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .security-header h2 {
+            color: #e74c3c;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .warning-banner {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .key-input-group {
+            margin-bottom: 25px;
+        }
+
+        .key-input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .key-input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+        }
+
+        .key-input-group input:focus {
+            border-color: #e74c3c;
+            outline: none;
+        }
+
+        .unlock-button {
+            width: 100%;
+            padding: 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .unlock-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .secret-content {
+            display: none;
+        }
+
+        .secret-header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .secret-header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .classified-box {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .classified-box h3 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .key-input-group input.correct {
+            border-color: #27ae60 !important;
+            background-color: #d4edda;
+        }
+
+        .key-input-group input.incorrect {
+            border-color: #e74c3c !important;
+            background-color: #f8d7da;
+        }
+
+        .validation-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            display: none;
+        }
+
+        .key-input-wrapper {
+            position: relative;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .individual-error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Zugriff verweigert Sektion -->
+        <div id="accessDenied" style="display: none;">
+            <section class="page-header">
+                <h1>🔒 Zugriff verweigert</h1>
+                <p>Sie haben keine Berechtigung für diese Seite.</p>
+            </section>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="admin.html" class="btn btn-primary">Zum Admin-Login</a>
+            </div>
+        </div>
+
+        <!-- Passwort-Eingabe Sektion -->
+        <div id="securityCheck" class="security-container" style="display: none;">
+            <div class="security-header">
+                <h2>🔐 SICHERHEITSPROTOKOLL STUFE 5</h2>
+                <p>Drei Sicherheitsschlüssel erforderlich</p>
+            </div>
+
+            <div class="warning-banner">
+                <strong>⚠️ WARNUNG:</strong> Unbefugter Zugriff wird protokolliert und strafrechtlich verfolgt.
+            </div>
+
+            <form id="securityForm" onsubmit="return validateKeys(event)">
+                <div class="key-input-group">
+                    <label for="key1">🔑 Sicherheitsschlüssel Alpha</label>
+                    <div class="key-input-wrapper">
+                        <input type="text" id="key1" placeholder="XXX-XXX-XXX" maxlength="11" required>
+                        <span class="validation-icon" id="icon1"></span>
+                    </div>
+                    <p class="success-message" id="success1">✓ Schlüssel Alpha akzeptiert</p>
+                    <p class="individual-error" id="error1">✗ Schlüssel Alpha ungültig</p>
+                </div>
+
+                <div class="key-input-group">
+                    <label for="key2">🔑 Sicherheitsschlüssel Beta</label>
+                    <div class="key-input-wrapper">
+                        <input type="text" id="key2" placeholder="XXX-XXX-XXX" maxlength="11" required>
+                        <span class="validation-icon" id="icon2"></span>
+                    </div>
+                    <p class="success-message" id="success2">✓ Schlüssel Beta akzeptiert</p>
+                    <p class="individual-error" id="error2">✗ Schlüssel Beta ungültig</p>
+                </div>
+
+                <div class="key-input-group">
+                    <label for="key3">🔑 Sicherheitsschlüssel Gamma</label>
+                    <div class="key-input-wrapper">
+                        <input type="text" id="key3" placeholder="XXX-XXX-XXX" maxlength="11" required>
+                        <span class="validation-icon" id="icon3"></span>
+                    </div>
+                    <p class="success-message" id="success3">✓ Schlüssel Gamma akzeptiert</p>
+                    <p class="individual-error" id="error3">✗ Schlüssel Gamma ungültig</p>
+                </div>
+
+                <button type="submit" class="unlock-button">🔓 ZUGRIFF FREISCHALTEN</button>
+                <p class="error-message" id="errorMessage">Nicht alle Sicherheitsschlüssel sind korrekt!</p>
+            </form>
+        </div>
+
+        <!-- Geheime Inhalte -->
+        <div id="secretContent" class="secret-content">
+            <div class="secret-header">
+                <div class="success-icon">✅</div>
+                <h1>ZUGRIFF GEWÄHRT</h1>
+                <p>Klassifizierungsstufe: TOP SECRET</p>
+            </div>
+
+            <section class="content-section">
+                <div class="classified-box">
+                    <h3>📋 PROJEKT FROSTLINE - FINALE DOKUMENTATION</h3>
+                    <p><strong>Klassifizierung:</strong> Streng Geheim</p>
+                    <p><strong>Verantwortlich:</strong> Dr. Emil Carvon</p>
+                    <p><strong>Status:</strong> [ZENSIERT]</p>
+                    <hr>
+                    <p>Sie haben erfolgreich Zugriff auf die höchste Sicherheitsstufe erhalten.
+                        Alle Informationen in diesem Bereich sind als STRENG VERTRAULICH klassifiziert.</p>
+                </div>
+
+                <div class="classified-box">
+                    <h3>🧬 WICHTIGE ERKENNTNISSE</h3>
+                    <p>Das Projekt Frostline hat seine finalen Entwicklungsphasen erreicht.
+                        Die Ergebnisse übertreffen alle Erwartungen, bergen jedoch erhebliche [ZENSIERT].</p>
+                    <p><strong>Empfehlung:</strong> Sofortige Einstellung aller Experimente der Abteilung X7.</p>
+                </div>
+
+                <div class="classified-box">
+                    <h3>⚠️ SICHERHEITSHINWEIS</h3>
+                    <p>Diese Informationen dürfen unter keinen Umständen das Gebäude verlassen.
+                        Jede Weitergabe wird als Hochverrat behandelt.</p>
+                    <p><strong>Autorisiert durch:</strong> VANTERRA Sicherheitsrat</p>
+                    <p><strong>Dokumenten-ID:</strong> TS-7832-FINAL</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="index.html" class="btn btn-secondary">Zur Startseite zurückkehren</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Die drei korrekten Passwörter (anpassen nach Bedarf)
+        const correctKeys = {
+            key1: '572-070-305',  // Ersetze mit deinem ersten Passwort
+            key2: '110-193-572',  // Ersetze mit deinem zweiten Passwort
+            key3: 'ZZZ-ZZZ-ZZZ'   // Ersetze mit deinem dritten Passwort
+        };
+
+        // Validiere einzelnes Passwort in Echtzeit
+        function validateSingleKey(keyNumber) {
+            const input = document.getElementById('key' + keyNumber);
+            const icon = document.getElementById('icon' + keyNumber);
+            const successMsg = document.getElementById('success' + keyNumber);
+            const errorMsg = document.getElementById('error' + keyNumber);
+            const value = input.value.trim();
+
+            // Nur validieren wenn vollständig (11 Zeichen mit Bindestrichen)
+            if (value.length === 11) {
+                if (value === correctKeys['key' + keyNumber]) {
+                    // Korrekt
+                    input.classList.remove('incorrect');
+                    input.classList.add('correct');
+                    icon.textContent = '✓';
+                    icon.style.color = '#27ae60';
+                    icon.style.display = 'block';
+                    successMsg.style.display = 'block';
+                    errorMsg.style.display = 'none';
+                } else {
+                    // Falsch
+                    input.classList.remove('correct');
+                    input.classList.add('incorrect');
+                    icon.textContent = '✗';
+                    icon.style.color = '#e74c3c';
+                    icon.style.display = 'block';
+                    successMsg.style.display = 'none';
+                    errorMsg.style.display = 'block';
+                }
+            } else {
+                // Noch nicht vollständig
+                input.classList.remove('correct', 'incorrect');
+                icon.style.display = 'none';
+                successMsg.style.display = 'none';
+                errorMsg.style.display = 'none';
+            }
+        }
+
+        function validateKeys(event) {
+            event.preventDefault();
+
+            const key1 = document.getElementById('key1').value.trim();
+            const key2 = document.getElementById('key2').value.trim();
+            const key3 = document.getElementById('key3').value.trim();
+            const errorMsg = document.getElementById('errorMessage');
+
+            // Validierung der Passwörter
+            if (key1 === correctKeys.key1 &&
+                key2 === correctKeys.key2 &&
+                key3 === correctKeys.key3) {
+
+                // Erfolgreicher Zugriff
+                document.getElementById('securityCheck').style.display = 'none';
+                document.getElementById('secretContent').style.display = 'block';
+                errorMsg.style.display = 'none';
+
+                // Speichere Zugriff in sessionStorage
+                sessionStorage.setItem('topSecretAccess', 'true');
+            } else {
+                // Fehlgeschlagener Zugriff
+                errorMsg.style.display = 'block';
+
+                // Validiere jedes Feld einzeln
+                validateSingleKey(1);
+                validateSingleKey(2);
+                validateSingleKey(3);
+            }
+        }
+
+        // Auto-Format für Bindestriche und Echtzeit-Validierung
+        ['key1', 'key2', 'key3'].forEach((id, index) => {
+            const keyNumber = index + 1;
+            document.getElementById(id).addEventListener('input', function (e) {
+                let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+                if (value.length > 3) value = value.slice(0, 3) + '-' + value.slice(3);
+                if (value.length > 7) value = value.slice(0, 7) + '-' + value.slice(7);
+                if (value.length > 11) value = value.slice(0, 11);
+                e.target.value = value.toUpperCase();
+
+                // Validiere in Echtzeit
+                validateSingleKey(keyNumber);
+            });
+
+            // Validiere auch beim Verlassen des Feldes
+            document.getElementById(id).addEventListener('blur', function () {
+                validateSingleKey(keyNumber);
+            });
+        });
+
+        // Prüfe Admin-Berechtigung beim Laden der Seite
+        window.onload = function () {
+            // Prüfe ob Admin eingeloggt ist
+            if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+                // Kein Admin-Zugriff - zeige Zugriff verweigert
+                document.getElementById('accessDenied').style.display = 'block';
+                document.getElementById('securityCheck').style.display = 'none';
+                document.getElementById('secretContent').style.display = 'none';
+                return;
+            }
+
+            // Admin ist eingeloggt - prüfe ob bereits Top Secret Zugriff gewährt
+            if (sessionStorage.getItem('topSecretAccess') === 'true') {
+                document.getElementById('securityCheck').style.display = 'none';
+                document.getElementById('secretContent').style.display = 'block';
+                document.getElementById('accessDenied').style.display = 'none';
+            } else {
+                // Zeige Passwort-Eingabe
+                document.getElementById('securityCheck').style.display = 'block';
+                document.getElementById('secretContent').style.display = 'none';
+                document.getElementById('accessDenied').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

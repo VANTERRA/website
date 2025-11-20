@@ -24,53 +24,75 @@
         </div>
     </nav>
 
-    <section class="page-header">
-        <div class="container">
-            <h1>Hausmeister Service</h1>
-            <p>Technische Unterstützung & Gebäudeverwaltung</p>
-        </div>
-    </section>
+    <!-- Zugriff verweigert Nachricht -->
+    <div id="accessDenied" style="display: none;">
+        <section class="page-header">
+            <div class="container">
+                <h1>🔒 Zugriff verweigert</h1>
+                <p>Sie müssen als Mitarbeiter eingeloggt sein, um auf diese Seite zuzugreifen.</p>
+            </div>
+        </section>
+        <section class="content-section">
+            <div class="container" style="text-align: center;">
+                <a href="employee.html" class="btn btn-primary">Zum Mitarbeiter-Login</a>
+            </div>
+        </section>
+    </div>
 
-    <section class="content-section">
-        <div class="container">
-            <div style="max-width: 600px; margin: 0 auto;">
-                <h2>Hausmeister Information</h2>
+    <!-- Hausmeister Inhalt -->
+    <div id="hausmeisterContent" style="display: none;">
+        <section class="page-header">
+            <div class="container">
+                <h1>Hausmeister Service</h1>
+                <p>Technische Unterstützung & Gebäudeverwaltung</p>
+            </div>
+        </section>
 
-                <div class="info-box">
-                    <h3>👨‍🔧 T■o■■■ ■■■■■■mann </h3>
-                    <p><strong>Hausmeister & Facility Manager</strong><br>
-                        Seit 2010 bei VANTERRA</p>
-                </div>
+        <section class="content-section">
+            <div class="container">
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <h2>Hausmeister Information</h2>
 
-                <div class="info-box" style="margin-top: 30px;">
-                    <h3>📞 Direkte Kontaktdaten</h3>
-                    <p>Telefon: +49 (0) ■■■■■■■■■<br>
-                        E-Mail: ■■■■■■■■■@vanterra-facility.com<br>
-                        <small>Mo-Fr: 12:00 - Mittag</small>
-                    </p>
-                </div>
+                    <div class="info-box">
+                        <h3>👨‍🔧 T■o■■■ ■■■■■■mann </h3>
+                        <p><strong>Hausmeister & Facility Manager</strong><br>
+                            Seit 2010 bei VANTERRA</p>
+                    </div>
 
-                <div class="info-box" style="margin-top: 30px;">
-                    <h3>🔧 Zuständigkeiten</h3>
-                    <p>
-                        • Gebäudewartung<br>
-                        • Reparaturen<br>
-                        • Sicherheitskontrollen<br>
-                        • Schlüsselverwaltung<br>
-                        • Technische Störungen
-                    </p>
-                </div>
+                    <div class="info-box" style="margin-top: 30px;">
+                        <h3>📞 Direkte Kontaktdaten</h3>
+                        <p>Telefon: +49 (0) ■■■■■■■■■<br>
+                            E-Mail: ■■■■■■■■■@vanterra-facility.com<br>
+                            <small>Mo-Fr: 12:00 - Mittag</small>
+                        </p>
+                    </div>
 
-                <div class="info-box dark" style="margin-top: 30px;">
-                    <h3>⚡ Notfall-Kontakt - Nur mit Kundennummer!</h3>
-                    <p><strong>24/7 Notfall-Hotline:</strong><br>
-                        +49 (0) XXX XXXXXXX <br>
-                        <small>Vergessen Sie Ihre Kundennummer nicht!</small>
-                    </p>
+                    <div class="info-box" style="margin-top: 30px;">
+                        <h3>🔧 Zuständigkeiten</h3>
+                        <p>
+                            • Gebäudewartung<br>
+                            • Reparaturen<br>
+                            • Sicherheitskontrollen<br>
+                            • Schlüsselverwaltung<br>
+                            • Technische Störungen
+                        </p>
+                    </div>
+
+                    <div class="info-box dark" style="margin-top: 30px;">
+                        <h3>⚡ Notfall-Kontakt - Nur mit Kundennummer!</h3>
+                        <p><strong>24/7 Notfall-Hotline:</strong><br>
+                            +49 15141635112 <br>
+                            <small>Vergessen Sie Ihre Kundennummer nicht!</small>
+                        </p>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="employee.html" class="btn btn-secondary">Zurück zum Mitarbeiterbereich</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <footer class="footer">
         <div class="container">
@@ -88,11 +110,33 @@
                     <h4>Intern</h4>
                     <p><a href="employee.html" class="footer-link">Mitarbeiterbereich</a></p>
                     <p><a href="admin.html" class="footer-link">Admin-Bereich</a></p>
-                    <p><a href="hausmeister.html" class="footer-link">Hausmeister</a></p>
+                    <p id="hausmeisterLink" style="display: none;">Hausmeister</p>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Prüfe ob Mitarbeiter eingeloggt ist
+        window.onload = function () {
+            const hausmeisterLink = document.getElementById('hausmeisterLink');
+
+            if (sessionStorage.getItem('employeeLoggedIn') === 'true') {
+                // Mitarbeiter ist eingeloggt - zeige Inhalt
+                document.getElementById('hausmeisterContent').style.display = 'block';
+                document.getElementById('accessDenied').style.display = 'none';
+
+                // Zeige Hausmeister-Link im Footer
+                if (hausmeisterLink) {
+                    hausmeisterLink.style.display = 'block';
+                }
+            } else {
+                // Kein Mitarbeiter-Login - zeige Zugriff verweigert
+                document.getElementById('hausmeisterContent').style.display = 'none';
+                document.getElementById('accessDenied').style.display = 'block';
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -42,11 +42,23 @@ document.addEventListener('DOMContentLoaded', function () {
     function showProtectedContent() {
         loginSection.style.display = 'none';
         protectedContent.style.display = 'block';
+
+        // Zeige Hausmeister-Link
+        const hausmeisterLink = document.getElementById('hausmeisterLink');
+        if (hausmeisterLink) {
+            hausmeisterLink.style.display = 'block';
+        }
     }
 
     function hideProtectedContent() {
         loginSection.style.display = 'block';
         protectedContent.style.display = 'none';
         document.getElementById('password').value = '';
+
+        // Verstecke Hausmeister-Link
+        const hausmeisterLink = document.getElementById('hausmeisterLink');
+        if (hausmeisterLink) {
+            hausmeisterLink.style.display = 'none';
+        }
     }
 });

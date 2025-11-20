@@ -51,6 +51,51 @@
             text-align: center;
             padding: 100px 20px;
         }
+
+        .hidden-link {
+            cursor: pointer;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .hidden-link:hover {
+            color: inherit;
+        }
+
+        .secret-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .secret-modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 30px;
+            border: 2px solid #888;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .secret-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .secret-close:hover,
+        .secret-close:focus {
+            color: #000;
+        }
     </style>
 </head>
 
@@ -540,7 +585,7 @@
                         </tr>
                         <tr>
                             <td>151</td>
-                            <td>Daniela Stein</td>
+                            <td><span class="hidden-link" id="judithLink">Judith</span> Stein</td>
                             <td>Compliance-Beauftragte</td>
                             <td>Recht</td>
                             <td>d.stein@vanterra.com</td>
@@ -943,6 +988,21 @@
         </div>
     </div>
 
+    <!-- Secret Modal -->
+    <div id="secretModal" class="secret-modal">
+        <div class="secret-modal-content">
+            <span class="secret-close">&times;</span>
+            <h2>🔍 Vertrauliche Notiz</h2>
+            <p><strong>Betreff:</strong> Judith Stein - Interne Aufzeichnung</p>
+            <hr>
+            <p>Judith hat in letzter Zeit ungewöhnliche Aktivitäten im Compliance-System gezeigt.
+                Sie scheint sich besonders für die Dokumente von Projekt Frostline zu interessieren,
+                obwohl dies nicht zu ihrem direkten Aufgabenbereich gehört.</p>
+            <p><strong>Empfehlung:</strong> Anrufen und Aktivitäten überwachen. 1234556.</p>
+            <p style="color: #e74c3c; margin-top: 20px;"><em>- Dr. Emil Carvon, vertraulich</em></p>
+        </div>
+    </div>
+
     <script>
         // Prüfe ob Admin eingeloggt ist
         window.onload = function () {
@@ -954,6 +1014,29 @@
                 document.getElementById('accessDenied').style.display = 'block';
             }
         }
+
+        // Secret Modal Logic
+        const judithLink = document.getElementById('judithLink');
+        const modal = document.getElementById('secretModal');
+        const closeBtn = document.querySelector('.secret-close');
+
+        if (judithLink) {
+            judithLink.addEventListener('click', function () {
+                modal.style.display = 'block';
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+        }
+
+        window.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
     </script>
 
     <footer class="footer">

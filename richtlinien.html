@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interne Richtlinien - VANTERRA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .guidelines-section {
+            margin-bottom: 40px;
+        }
+
+        .guideline-card {
+            background: white;
+            border-left: 4px solid #3498db;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .guideline-card.critical {
+            border-left-color: #e74c3c;
+        }
+
+        .guideline-card.warning {
+            border-left-color: #f39c12;
+        }
+
+        .guideline-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+
+        .guideline-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .guideline-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .guideline-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .access-denied {
+            display: none;
+            text-align: center;
+            padding: 100px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Zugriff verweigert Nachricht -->
+    <div id="accessDenied" class="access-denied">
+        <section class="page-header">
+            <div class="container">
+                <h1>🔒 Zugriff verweigert</h1>
+                <p>Diese Seite ist nur für Mitarbeiter zugänglich.</p>
+            </div>
+        </section>
+        <section class="content-section">
+            <div class="container" style="text-align: center;">
+                <a href="employee.html" class="btn btn-primary">Zum Mitarbeiter-Login</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Richtlinien Inhalt -->
+    <div id="richtlinienContent" style="display: none;">
+        <section class="page-header">
+            <div class="container">
+                <h1>📋 Interne Richtlinien</h1>
+                <p>Wichtige Regelungen für alle Mitarbeiter</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div style="max-width: 900px; margin: 0 auto;">
+
+                    <!-- Sicherheit -->
+                    <div class="guidelines-section">
+                        <div class="guideline-card critical">
+                            <h3>🔐 Sicherheit & Datenschutz</h3>
+                            <ul class="guideline-list">
+                                <li>Passwörter müssen mindestens 12 Zeichen lang sein und regelmäßig gewechselt werden
+                                </li>
+                                <li>Arbeitsplätze müssen beim Verlassen gesperrt werden (Windows + L)</li>
+                                <li>Vertrauliche Dokumente dürfen nicht unbeaufsichtigt liegengelassen werden</li>
+                                <li>USB-Sticks und externe Datenträger sind nur nach IT-Freigabe erlaubt</li>
+                                <li>Verdächtige E-Mails müssen sofort der IT-Abteilung gemeldet werden</li>
+                                <li>Besucherausweise müssen sichtbar getragen werden</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Laborrichtlinien -->
+                    <div class="guidelines-section">
+                        <div class="guideline-card warning">
+                            <h3>🧪 Laborrichtlinien</h3>
+                            <ul class="guideline-list">
+                                <li>Schutzkleidung (Kittel, Handschuhe, Schutzbrille) ist in allen Laborbereichen
+                                    Pflicht</li>
+                                <li>Essen und Trinken sind in Laboren strengstens untersagt</li>
+                                <li>Alle Chemikalien müssen korrekt gekennzeichnet und dokumentiert werden</li>
+                                <li>Sicherheitsdatenblätter müssen vor Verwendung neuer Substanzen gelesen werden</li>
+                                <li>Notausgänge und Feuerlöscher dürfen nicht blockiert werden</li>
+                                <li>Zwischenfälle müssen sofort dokumentiert und gemeldet werden</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Arbeitszeit -->
+                    <div class="guidelines-section">
+                        <div class="guideline-card">
+                            <h3>⏰ Arbeitszeit & Anwesenheit</h3>
+                            <ul class="guideline-list">
+                                <li>Kernarbeitszeit: 9:00 - 15:00 Uhr (Montag bis Freitag)</li>
+                                <li>Flexible Arbeitszeiten möglich nach Absprache mit der Abteilungsleitung</li>
+                                <li>Pausenzeiten: 30 Minuten ab 6 Stunden, 45 Minuten ab 9 Stunden</li>
+                                <li>Krankheitsmeldung bis spätestens 9:00 Uhr bei direktem Vorgesetzten</li>
+                                <li>Urlaubsanträge mindestens 2 Wochen im Voraus einreichen</li>
+                                <li>Homeoffice nur nach vorheriger Genehmigung</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- IT-Nutzung -->
+                    <div class="guidelines-section">
+                        <div class="guideline-card">
+                            <h3>💻 IT-Nutzung</h3>
+                            <ul class="guideline-list">
+                                <li>Firmen-Hardware darf nicht für private Zwecke verwendet werden</li>
+                                <li>Software darf nur über die IT-Abteilung installiert werden</li>
+                                <li>Cloud-Dienste nur nach Freigabe durch IT-Sicherheit nutzen</li>
+                                <li>E-Mails mit vertraulichen Daten müssen verschlüsselt werden</li>
+                                <li>WLAN-Passwörter dürfen nicht an Dritte weitergegeben werden</li>
+                                <li>Regelmäßige Datensicherungen sind Pflicht</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Geheimhaltung -->
+                    <div class="guidelines-section">
+                        <div class="guideline-card critical">
+                            <h3>🤐 Geheimhaltung & Vertraulichkeit</h3>
+                            <ul class="guideline-list">
+                                <li>Forschungsergebnisse dürfen nicht nach außen kommuniziert werden</li>
+                                <li>Gespräche über Projekte nur in gesicherten Räumen führen</li>
+                                <li>Social Media: Keine Informationen über VANTERRA-Projekte posten</li>
+                                <li>Besucher dürfen nur nach Anmeldung und mit Begleitung ins Gebäude</li>
+                                <li>Dokumente der Sicherheitsstufe 3+ müssen im Safe verwahrt werden</li>
+                                <li>Projekt Frostline und Abteilung X7: Streng vertraulich - Level 4+ erforderlich</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Umgang miteinander -->
+                    <div class="guidelines-section">
+                        <div class="guideline-card">
+                            <h3>🤝 Zusammenarbeit & Kommunikation</h3>
+                            <ul class="guideline-list">
+                                <li>Respektvoller Umgang mit allen Kollegen unabhängig von Position</li>
+                                <li>Mobbing, Diskriminierung und Belästigung werden nicht toleriert</li>
+                                <li>Konflikte sollten direkt angesprochen oder an HR gemeldet werden</li>
+                                <li>Meetings sollten pünktlich beginnen und enden</li>
+                                <li>E-Mails werden innerhalb von 24 Stunden beantwortet</li>
+                                <li>Teamwork und Wissensaustausch werden gefördert</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Notfallprozeduren -->
+                    <div class="guidelines-section">
+                        <div class="guideline-card warning">
+                            <h3>🚨 Notfallprozeduren</h3>
+                            <ul class="guideline-list">
+                                <li>Feueralarm: Gebäude sofort über nächsten Notausgang verlassen</li>
+                                <li>Sammelplatz: Parkplatz Ost (siehe Notfallplan)</li>
+                                <li>Erste-Hilfe-Kästen befinden sich in jedem Stockwerk</li>
+                                <li>Ersthelfer sind auf Aushängen gekennzeichnet</li>
+                                <li>Chemieunfälle: Sofort Notdusche nutzen und Vorgesetzten informieren</li>
+                                <li>Notruf intern: 911 | Extern: 112</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Wichtiger Hinweis -->
+                    <div class="info-box dark" style="margin-top: 40px;">
+                        <h3>📢 Wichtiger Hinweis</h3>
+                        <p>Alle Mitarbeiter sind verpflichtet, diese Richtlinien einzuhalten. Verstöße können zu
+                            arbeitsrechtlichen Konsequenzen bis hin zur Kündigung führen. Bei Fragen wenden Sie sich
+                            bitte an die Personalabteilung (Nina Schulze - n.schulze@vanterra.com).</p>
+                        <p style="margin-top: 15px;"><strong>Letzte Aktualisierung:</strong> 01.12.2024<br>
+                            <strong>Version:</strong> 3.2
+                        </p>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 40px;">
+                        <a href="employee.html" class="btn btn-secondary">Zurück zum Mitarbeiterbereich</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                    <p class="small-text">Vertrauliche Informationen unterliegen strengster Geheimhaltung</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Intern</h4>
+                    <p><a href="employee.html" class="footer-link">Mitarbeiterbereich</a></p>
+                    <p><a href="admin.html" class="footer-link">Admin-Bereich</a></p>
+                    <p id="hausmeisterLink" style="display: none;"><a href="hausmeister.html"
+                            class="footer-link">Hausmeister</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Prüfe ob Mitarbeiter eingeloggt ist
+        window.addEventListener('load', function () {
+            const hausmeisterLink = document.getElementById('hausmeisterLink');
+
+            if (sessionStorage.getItem('employeeLoggedIn') === 'true') {
+                // Mitarbeiter ist eingeloggt - zeige Inhalt
+                document.getElementById('richtlinienContent').style.display = 'block';
+                document.getElementById('accessDenied').style.display = 'none';
+
+                // Zeige Hausmeister-Link im Footer
+                if (hausmeisterLink) {
+                    hausmeisterLink.style.display = 'block';
+                }
+            } else {
+                // Kein Mitarbeiter-Login - zeige Zugriff verweigert
+                document.getElementById('richtlinienContent').style.display = 'none';
+                document.getElementById('accessDenied').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

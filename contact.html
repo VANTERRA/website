@@ -130,12 +130,24 @@
                     <h4>Intern</h4>
                     <p><a href="employee.html" class="footer-link">Mitarbeiterbereich</a></p>
                     <p><a href="admin.html" class="footer-link">Admin-Bereich</a></p>
+                    <p id="hausmeisterLink" style="display: none;">Hausmeister</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+        // Zeige Hausmeister-Link wenn Mitarbeiter eingeloggt
+        window.addEventListener('load', function () {
+            if (sessionStorage.getItem('employeeLoggedIn') === 'true') {
+                const hausmeisterLink = document.getElementById('hausmeisterLink');
+                if (hausmeisterLink) {
+                    hausmeisterLink.style.display = 'block';
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

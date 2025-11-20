@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forschungsprojekte - VANTERRA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .project-header h3 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .project-body {
+            padding: 25px;
+        }
+
+        .project-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-meta {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .project-meta-item {
+            margin: 8px 0;
+        }
+
+        .project-meta strong {
+            color: #2c3e50;
+        }
+
+        .access-denied {
+            display: none;
+            text-align: center;
+            padding: 100px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Zugriff verweigert Nachricht -->
+    <div id="accessDenied" class="access-denied">
+        <section class="page-header">
+            <div class="container">
+                <h1>🔒 Zugriff verweigert</h1>
+                <p>Diese Seite ist nur für Mitarbeiter zugänglich.</p>
+            </div>
+        </section>
+        <section class="content-section">
+            <div class="container" style="text-align: center;">
+                <a href="employee.html" class="btn btn-primary">Zum Mitarbeiter-Login</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Projekte Inhalt (nur für Mitarbeiter) -->
+    <div id="projekteContent" style="display: none;">
+        <section class="page-header">
+            <div class="container">
+                <h1>Unsere Forschungsprojekte</h1>
+                <p>Innovation für eine bessere Zukunft</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="intro-text" style="max-width: 800px; margin: 0 auto 40px; text-align: center;">
+                    <p>Bei VANTERRA arbeiten wir an zukunftsweisenden Projekten in verschiedenen Bereichen der
+                        biomedizinischen Forschung. Unsere Arbeit zielt darauf ab, das Leben der Menschen zu verbessern
+                        und medizinische Herausforderungen zu lösen.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Projekt 1 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>🌱 Projekt VitaGreen</h3>
+                            <span class="project-status">AKTIV</span>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                Entwicklung nachhaltiger Pflanzenwirkstoffe für die Lebensmittelindustrie.
+                                Unser Ziel ist es, natürliche Konservierungsmittel zu erforschen, die die
+                                Haltbarkeit von Lebensmitteln verlängern und gleichzeitig gesundheitlich
+                                unbedenklich sind.
+                            </p>
+                            <div class="project-meta">
+                                <div class="project-meta-item">
+                                    <strong>Leitung:</strong> Dr. Johann Weber
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Abteilung:</strong> Biomedizin
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Laufzeit:</strong> 2022 - 2025
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projekt 2 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>💊 CellRegenesis</h3>
+                            <span class="project-status">AKTIV</span>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                Forschung zur Hautzellregeneration bei Brandverletzungen. Wir entwickeln
+                                innovative Therapieansätze, die die natürliche Heilung der Haut beschleunigen
+                                und Narbenbildung minimieren sollen.
+                            </p>
+                            <div class="project-meta">
+                                <div class="project-meta-item">
+                                    <strong>Leitung:</strong> Dr. Andrea Keller
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Abteilung:</strong> Labor Ost
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Laufzeit:</strong> 2023 - 2026
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projekt 3 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>🧬 GeneDiagnostik Plus</h3>
+                            <span class="project-status">AKTIV</span>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                Verbesserung genetischer Diagnosemethoden für Erbkrankheiten. Durch präzisere
+                                Tests möchten wir Familien frühere und genauere Diagnosen ermöglichen, um
+                                rechtzeitig präventive Maßnahmen ergreifen zu können.
+                            </p>
+                            <div class="project-meta">
+                                <div class="project-meta-item">
+                                    <strong>Leitung:</strong> Dr. Claudia Bauer
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Abteilung:</strong> Biomedizin
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Laufzeit:</strong> 2021 - 2024
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projekt 4 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>🩺 ImmunoBoost</h3>
+                            <span class="project-status">AKTIV</span>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                Stärkung des Immunsystems bei älteren Menschen. Wir erforschen natürliche
+                                Wege, wie das Immunsystem im Alter aktiv gehalten werden kann, um die
+                                Anfälligkeit für Infektionen zu reduzieren.
+                            </p>
+                            <div class="project-meta">
+                                <div class="project-meta-item">
+                                    <strong>Leitung:</strong> Dr. Monika Krause
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Abteilung:</strong> Projekt Frostline
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Laufzeit:</strong> 2023 - 2027
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projekt 5 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>🔬 NutriAnalytics</h3>
+                            <span class="project-status">PILOTPHASE</span>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                Analyse von Nährstoffaufnahme und Stoffwechselprozessen. Das Projekt zielt
+                                darauf ab, personalisierte Ernährungsempfehlungen basierend auf individuellen
+                                Stoffwechselprofilen zu entwickeln.
+                            </p>
+                            <div class="project-meta">
+                                <div class="project-meta-item">
+                                    <strong>Leitung:</strong> Dr. Michael Brenner
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Abteilung:</strong> Labor West
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Laufzeit:</strong> 2024 - 2026
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projekt 6 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>🧪 BioSensor Tech</h3>
+                            <span class="project-status">AKTIV</span>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                Entwicklung tragbarer Biosensoren zur Früherkennung von Diabetes.
+                                Die Sensoren sollen kontinuierlich Blutzuckerwerte messen und Patienten
+                                rechtzeitig vor kritischen Werten warnen.
+                            </p>
+                            <div class="project-meta">
+                                <div class="project-meta-item">
+                                    <strong>Leitung:</strong> Dr. Petra Hoffmann
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Abteilung:</strong> Abteilung X7
+                                </div>
+                                <div class="project-meta-item">
+                                    <strong>Laufzeit:</strong> 2022 - 2025
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box dark"
+                    style="margin-top: 50px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <h3>🔒 Vertraulichkeit</h3>
+                    <p>Einige unserer fortgeschrittenen Forschungsprojekte unterliegen strengster Geheimhaltung
+                        und können aus Wettbewerbsgründen nicht öffentlich dargestellt werden. Für nähere
+                        Informationen zu Partnerschaften kontaktieren Sie bitte unsere Geschäftsleitung.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                    <p class="small-text">Vertrauliche Informationen unterliegen strengster Geheimhaltung</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Intern</h4>
+                    <p><a href="employee.html" class="footer-link">Mitarbeiterbereich</a></p>
+                    <p><a href="admin.html" class="footer-link">Admin-Bereich</a></p>
+                    <p id="hausmeisterLink" style="display: none;"><a href="hausmeister.html"
+                            class="footer-link">Hausmeister</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Prüfe ob Mitarbeiter eingeloggt ist
+        window.addEventListener('load', function () {
+            const hausmeisterLink = document.getElementById('hausmeisterLink');
+
+            if (sessionStorage.getItem('employeeLoggedIn') === 'true') {
+                // Mitarbeiter ist eingeloggt - zeige Inhalt
+                document.getElementById('projekteContent').style.display = 'block';
+                document.getElementById('accessDenied').style.display = 'none';
+
+                // Zeige Hausmeister-Link im Footer
+                if (hausmeisterLink) {
+                    hausmeisterLink.style.display = 'block';
+                }
+            } else {
+                // Kein Mitarbeiter-Login - zeige Zugriff verweigert
+                document.getElementById('projekteContent').style.display = 'none';
+                document.getElementById('accessDenied').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

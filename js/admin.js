@@ -4,7 +4,7 @@ function handleLogin(event) {
     const password = document.getElementById('password').value;
 
     // Einfache Authentifizierung (in Produktion sollte dies serverseitig erfolgen)
-    if (username === 'admin' && password === 'C1rv0n!X24') {
+    if (username === 'Ketzer' && password === 'C1rv0n!X24') {
         document.getElementById('loginSection').style.display = 'none';
         document.getElementById('adminContent').style.display = 'block';
         document.getElementById('errorMessage').style.display = 'none';
