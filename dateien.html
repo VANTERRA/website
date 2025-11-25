@@ -38,6 +38,10 @@
             color: #3498db;
         }
 
+        .file-icon.audio {
+            color: #9b59b6;
+        }
+
         .file-info h3 {
             margin: 0 0 5px 0;
             color: #2c3e50;
@@ -122,6 +126,16 @@
         .view-button:hover {
             background: #2980b9;
         }
+
+        .audio-player {
+            display: none;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .audio-player audio {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -155,7 +169,7 @@
                     <div class="file-header">
                         <div class="file-icon">📄</div>
                         <div class="file-info">
-                            <h3>AKTE.pdf</h3>
+                            <h3>Akten</h3>
                             <p>Vertrauliches Dokument | PDF-Datei</p>
                         </div>
                     </div>
@@ -173,16 +187,41 @@
 
                 <div class="file-item">
                     <div class="file-header">
+                        <div class="file-icon audio">🎵</div>
+                        <div class="file-info">
+                            <h3>Audiodateien</h3>
+                            <p>Audiodatei | MP3-Format</p>
+                        </div>
+                    </div>
+
+                    <div class="password-section">
+                        <p><strong>Passwort erforderlich zum Abspielen:</strong></p>
+                        <div class="password-input">
+                            <input type="password" id="audioPassword" placeholder="Passwort eingeben">
+                            <button onclick="unlockAudio()">Entsperren</button>
+                        </div>
+                        <p class="error-message" id="audioPasswordError">Falsches Passwort!</p>
+                        <div class="audio-player" id="audioPlayer">
+                            <audio controls>
+                                <source src="assets/WARNUNG.mp3" type="audio/mpeg">
+                                Ihr Browser unterstützt das Audio-Element nicht.
+                            </audio>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-item">
+                    <div class="file-header">
                         <div class="file-icon video">🎥</div>
                         <div class="file-info">
-                            <h3>Video</h3>
+                            <h3>Videos</h3>
                             <p>Sicherheitsaufnahme | Video-Datei</p>
                         </div>
                     </div>
 
                     <div class="password-section">
                         <p><strong>Zugriff auf Überwachungsmaterial:</strong></p>
-                        <a href="video.html" class="view-button">Video ansehen</a>
+                        <a href="video.html" class="view-button">Videobereich</a>
                     </div>
                 </div>
             </div>
@@ -224,7 +263,7 @@
             successMsg.style.display = 'none';
 
             // Passwort prüfen (verwende dasselbe wie Admin-Login)
-            if (password === 'C1rv0n!X24') {
+            if (password === 'FAMEJCCVGBC') {
                 // Zeige Erfolgsmeldung
                 successMsg.style.display = 'block';
 
@@ -251,6 +290,27 @@
             }
         }
 
+        function unlockAudio() {
+            const password = document.getElementById('audioPassword').value;
+            const errorMsg = document.getElementById('audioPasswordError');
+            const audioPlayer = document.getElementById('audioPlayer');
+
+            // Verstecke vorherige Fehlermeldung
+            errorMsg.style.display = 'none';
+
+            // Passwort prüfen
+            if (password === '143772') {
+                // Zeige Audio-Player
+                audioPlayer.style.display = 'block';
+
+                // Lösche Passwort-Feld
+                document.getElementById('audioPassword').value = '';
+            } else {
+                // Zeige Fehlermeldung
+                errorMsg.style.display = 'block';
+            }
+        }
+
         // Enter-Taste zum Download
         document.addEventListener('DOMContentLoaded', function () {
             const passwordInput = document.getElementById('pdfPassword');
@@ -258,6 +318,15 @@
                 passwordInput.addEventListener('keypress', function (event) {
                     if (event.key === 'Enter') {
                         downloadPDF();
+                    }
+                });
+            }
+
+            const audioPasswordInput = document.getElementById('audioPassword');
+            if (audioPasswordInput) {
+                audioPasswordInput.addEventListener('keypress', function (event) {
+                    if (event.key === 'Enter') {
+                        unlockAudio();
                     }
                 });
             }

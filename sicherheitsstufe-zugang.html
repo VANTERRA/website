@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sicherheitszugang - VANTERRA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%);
+            min-height: 100vh;
+        }
+
+        .security-container {
+            max-width: 700px;
+            margin: 80px auto;
+            padding: 50px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c0000 100%);
+            border: 3px solid #ff0000;
+            border-radius: 16px;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+            animation: container-glow 3s infinite;
+        }
+
+        @keyframes container-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 80px rgba(255, 0, 0, 0.8);
+            }
+        }
+
+        .security-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #ff0000;
+        }
+
+        .security-header h1 {
+            color: #ff0000;
+            font-size: 32px;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+
+        .security-header p {
+            color: #ffcccc;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .key-section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #333;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .key-section.unlocked {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .key-section.locked {
+            border-color: #ff0000;
+        }
+
+        .key-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .key-icon {
+            font-size: 32px;
+            margin-right: 15px;
+        }
+
+        .key-title {
+            color: #ffcccc;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .key-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .key-input {
+            flex: 1;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #666;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .key-input:focus {
+            outline: none;
+            border-color: #ff0000;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .key-input.correct {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .key-input.wrong {
+            border-color: #ff0000;
+            background: rgba(255, 0, 0, 0.1);
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+        .key-button {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%);
+            border: 2px solid #ff0000;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .key-button:hover:not(:disabled) {
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .key-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .key-status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .key-status.success {
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            display: block;
+        }
+
+        .key-status.error {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid #ff0000;
+            color: #ff0000;
+            display: block;
+        }
+
+        .access-button {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #00ff00 0%, #00aa00 100%);
+            border: 3px solid #00ff00;
+            color: #000;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            display: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+        }
+
+        .access-button.show {
+            display: block;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(0, 255, 0, 0.8);
+            }
+        }
+
+        .access-button:hover {
+            background: linear-gradient(135deg, #00aa00 0%, #00ff00 100%);
+            transform: scale(1.02);
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.8);
+        }
+
+        .warning-box {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .warning-box p {
+            color: #ffcccc;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #ff6666;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: #ff0000;
+            text-decoration: underline;
+        }
+
+        .hint {
+            color: #999;
+            font-size: 12px;
+            margin-top: 8px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="security-container">
+        <div class="security-header">
+            <h1>⚠️ SICHERHEITSZUGANG ⚠️</h1>
+            <p>PROJEKT FROSTLINE - OBERSTE GEHEIMHALTUNGSSTUFE</p>
+            <p>Drei Sicherheitsschlüssel erforderlich</p>
+        </div>
+
+        <!-- Alpha Key -->
+        <div class="key-section" id="alphaSection">
+            <div class="key-header">
+                <div class="key-icon">🔑</div>
+                <div class="key-title">Alpha Schlüssel</div>
+            </div>
+            <div class="key-input-group">
+                <input type="text" class="key-input" id="alphaKey" placeholder="XXX-XXX-XXX" maxlength="11"
+                    pattern="[A-Za-z0-9]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{3}">
+                <button class="key-button" onclick="checkKey('alpha')">Prüfen</button>
+            </div>
+            <div class="key-status" id="alphaStatus"></div>
+        </div>
+
+        <!-- Beta Key -->
+        <div class="key-section" id="betaSection">
+            <div class="key-header">
+                <div class="key-icon">🔑</div>
+                <div class="key-title">Beta Schlüssel</div>
+            </div>
+            <div class="key-input-group">
+                <input type="text" class="key-input" id="betaKey" placeholder="XXX-XXX-XXX" maxlength="11"
+                    pattern="[A-Za-z0-9]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{3}" disabled>
+                <button class="key-button" onclick="checkKey('beta')" disabled id="betaButton">Prüfen</button>
+            </div>
+            <div class="hint">Wird nach Alpha-Schlüssel freigeschaltet</div>
+            <div class="key-status" id="betaStatus"></div>
+        </div>
+
+        <!-- Gamma Key -->
+        <div class="key-section" id="gammaSection">
+            <div class="key-header">
+                <div class="key-icon">🔑</div>
+                <div class="key-title">Gamma Schlüssel</div>
+            </div>
+            <div class="key-input-group">
+                <input type="text" class="key-input" id="gammaKey" placeholder="XXX-XXX-XXX" maxlength="11"
+                    pattern="[A-Za-z0-9]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{3}" disabled>
+                <button class="key-button" onclick="checkKey('gamma')" disabled id="gammaButton">Prüfen</button>
+            </div>
+            <div class="hint">Wird nach Beta-Schlüssel freigeschaltet</div>
+            <div class="key-status" id="gammaStatus"></div>
+        </div>
+
+        <!-- Access Button -->
+        <button class="access-button" id="accessButton" onclick="grantAccess()">
+            ✓ ZUGANG GEWÄHRT - PROJEKT FROSTLINE ÖFFNEN
+        </button>
+
+        <div class="warning-box">
+            <p>⚠️ WARNUNG ⚠️</p>
+            <p>Alle Zugriffsversuche werden protokolliert und überwacht.</p>
+            <p>Unbefugte Zugriffe werden strafrechtlich verfolgt.</p>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="admin.html" class="back-link">← Zurück zum Admin-Bereich</a>
+        </div>
+    </div>
+
+    <script>
+        // Richtige Schlüssel
+        const KEYS = {
+            alpha: '572-070-305',
+            beta: '110-193-075',
+            gamma: '222-408-126'
+        };
+
+        // Status der Schlüssel
+        let unlockedKeys = {
+            alpha: false,
+            beta: false,
+            gamma: false
+        };
+
+        // Auto-Format Eingabe
+        function formatKeyInput(input) {
+            input.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+
+                if (value.length > 3) {
+                    value = value.slice(0, 3) + '-' + value.slice(3);
+                }
+                if (value.length > 7) {
+                    value = value.slice(0, 7) + '-' + value.slice(7);
+                }
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+
+                e.target.value = value;
+            });
+        }
+
+        // Format-Handler für alle Inputs
+        formatKeyInput(document.getElementById('alphaKey'));
+        formatKeyInput(document.getElementById('betaKey'));
+        formatKeyInput(document.getElementById('gammaKey'));
+
+        function checkKey(keyType) {
+            const input = document.getElementById(keyType + 'Key');
+            const status = document.getElementById(keyType + 'Status');
+            const section = document.getElementById(keyType + 'Section');
+            const value = input.value.toUpperCase();
+
+            // Prüfe Format
+            if (!/^[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(value)) {
+                status.className = 'key-status error';
+                status.textContent = '❌ FEHLER: Ungültiges Format';
+                input.classList.add('wrong');
+                setTimeout(() => input.classList.remove('wrong'), 500);
+                return;
+            }
+
+            // Prüfe Schlüssel
+            if (value === KEYS[keyType]) {
+                unlockedKeys[keyType] = true;
+                status.className = 'key-status success';
+                status.textContent = '✓ SCHLÜSSEL AKZEPTIERT - ZUGANG GEWÄHRT';
+                input.classList.add('correct');
+                input.disabled = true;
+                section.classList.add('unlocked');
+                section.classList.remove('locked');
+
+                // Nächsten Schlüssel freischalten
+                if (keyType === 'alpha') {
+                    document.getElementById('betaKey').disabled = false;
+                    document.getElementById('betaButton').disabled = false;
+                    document.getElementById('betaSection').classList.add('locked');
+                } else if (keyType === 'beta') {
+                    document.getElementById('gammaKey').disabled = false;
+                    document.getElementById('gammaButton').disabled = false;
+                    document.getElementById('gammaSection').classList.add('locked');
+                } else if (keyType === 'gamma') {
+                    // Alle Schlüssel korrekt - Zugang gewähren
+                    document.getElementById('accessButton').classList.add('show');
+                }
+            } else {
+                status.className = 'key-status error';
+                status.textContent = '❌ ZUGRIFF VERWEIGERT - FALSCHER SCHLÜSSEL';
+                input.classList.add('wrong');
+                setTimeout(() => input.classList.remove('wrong'), 500);
+            }
+        }
+
+        function grantAccess() {
+            // Setze Session-Flag
+            sessionStorage.setItem('frostlineAccess', 'granted');
+
+            // Weiterleitung
+            window.location.href = 'sicherheitsstufe.html';
+        }
+
+        // Enter-Taste Support
+        document.getElementById('alphaKey').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkKey('alpha');
+        });
+        document.getElementById('betaKey').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkKey('beta');
+        });
+        document.getElementById('gammaKey').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkKey('gamma');
+        });
+    </script>
+</body>
+
+</html>

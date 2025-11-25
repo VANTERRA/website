@@ -15,7 +15,7 @@ const cables = [
 const correctOrder = [3, 1, 5, 2, 4, 6, 7, 8]; // GELB, ROT, LILA, BLAU, GRÜN, ORANGE, TÜRKIS, GRAU
 
 // Freizugebender Code
-const secretCode = '782';
+const secretCode = '-075';
 
 let cutCables = [];
 let gameOver = false;

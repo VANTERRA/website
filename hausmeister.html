@@ -6,9 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hausmeister - VANTERRA</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .restricted-access {
+            background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: flash-warning 1.5s infinite;
+        }
+
+        @keyframes flash-warning {
+
+            0%,
+            100% {
+                background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%);
+            }
+
+            50% {
+                background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            }
+        }
+
+        .info-box.dark {
+            background: linear-gradient(135deg, #1a0000 0%, #2c0000 100%);
+            border: 3px solid #ff0000;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            animation: danger-glow 2s infinite;
+        }
+
+        @keyframes danger-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+            }
+        }
+
+        .info-box.dark h3 {
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        }
+
+        .info-box.dark p {
+            color: #ffcccc;
+            font-weight: bold;
+        }
+
+        .info-box {
+            border-left: 4px solid #ff4444;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="restricted-access">
+        🚨 EINGESCHRÄNKTER ZUGANG - NUR FÜR AUTORISIERTES PERSONAL 🚨
+    </div>
+
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -110,7 +174,9 @@
                     <h4>Intern</h4>
                     <p><a href="employee.html" class="footer-link">Mitarbeiterbereich</a></p>
                     <p><a href="admin.html" class="footer-link">Admin-Bereich</a></p>
-                    <p id="hausmeisterLink" style="display: none;">Hausmeister</p>
+                    <p id="hausmeisterLink" style="display: none;"><a href="hausmeister.html"
+                            class="footer-link">Hausmeister</a>
+                    </p>
                 </div>
             </div>
         </div>

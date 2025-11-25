@@ -4,422 +4,845 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sicherheitsprotokoll - VANTERRA</title>
+    <title>SICHERHEITSSTUFE 5 - STRENG GEHEIM</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
-        .security-container {
-            max-width: 600px;
-            margin: 100px auto;
-            padding: 40px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            border: 2px solid #e74c3c;
+        body {
+            background: #000000;
+            color: #ff0000;
+            overflow-x: hidden;
         }
 
-        .security-header {
+        /* Extreme Warning Banner */
+        .top-secret-banner {
+            background: linear-gradient(90deg, #8b0000 0%, #ff0000 25%, #8b0000 50%, #ff0000 75%, #8b0000 100%);
+            background-size: 200% 100%;
+            animation: banner-slide 3s linear infinite;
+            border: 5px solid #ff0000;
+            border-left: none;
+            border-right: none;
+            padding: 25px;
             text-align: center;
-            margin-bottom: 30px;
-            color: #2c3e50;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 1), inset 0 0 30px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
         }
 
-        .security-header h2 {
-            color: #e74c3c;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .warning-banner {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 4px;
-        }
-
-        .key-input-group {
-            margin-bottom: 25px;
-        }
-
-        .key-input-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
-
-        .key-input-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-        }
-
-        .key-input-group input:focus {
-            border-color: #e74c3c;
-            outline: none;
-        }
-
-        .unlock-button {
-            width: 100%;
-            padding: 15px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 20px;
-            transition: all 0.3s;
-        }
-
-        .unlock-button:hover {
-            background: #c0392b;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .error-message {
-            color: #e74c3c;
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
-            display: none;
-        }
-
-        .secret-content {
-            display: none;
-        }
-
-        .secret-header {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .secret-header h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .classified-box {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 30px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 5px solid #e74c3c;
-        }
-
-        .classified-box h3 {
-            color: #e74c3c;
-            margin-top: 0;
-        }
-
-        .success-icon {
-            font-size: 80px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .key-input-group input.correct {
-            border-color: #27ae60 !important;
-            background-color: #d4edda;
-        }
-
-        .key-input-group input.incorrect {
-            border-color: #e74c3c !important;
-            background-color: #f8d7da;
-        }
-
-        .validation-icon {
+        .top-secret-banner::before {
+            content: "⚠️";
             position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            display: none;
+            font-size: 100px;
+            opacity: 0.1;
+            animation: warning-rotate 4s linear infinite;
+            left: 10%;
         }
 
-        .key-input-wrapper {
+        .top-secret-banner::after {
+            content: "⚠️";
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            animation: warning-rotate 4s linear infinite reverse;
+            right: 10%;
+        }
+
+        @keyframes banner-slide {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 200% 0%;
+            }
+        }
+
+        @keyframes warning-rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .top-secret-banner h1 {
+            color: #ffffff;
+            font-size: 42px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 1), 0 0 40px rgba(255, 0, 0, 0.8);
+            animation: text-flicker 1.5s infinite;
+        }
+
+        @keyframes text-flicker {
+
+            0%,
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 20px rgba(255, 0, 0, 1), 0 0 40px rgba(255, 0, 0, 0.8);
+            }
+
+            50% {
+                opacity: 0.8;
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.4);
+            }
+        }
+
+        .classification-level {
+            background: #0a0000;
+            border: 4px solid #ff0000;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 0 60px rgba(255, 0, 0, 0.9), inset 0 0 40px rgba(255, 0, 0, 0.2);
+            animation: box-pulse 2s infinite;
             position: relative;
         }
 
-        .success-message {
-            color: #27ae60;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
+        @keyframes box-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 60px rgba(255, 0, 0, 0.9), inset 0 0 40px rgba(255, 0, 0, 0.2);
+                border-color: #ff0000;
+            }
+
+            50% {
+                box-shadow: 0 0 100px rgba(255, 0, 0, 1), inset 0 0 60px rgba(255, 0, 0, 0.4);
+                border-color: #ff4444;
+            }
         }
 
-        .individual-error {
-            color: #e74c3c;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
+        .classification-level::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff0000, transparent);
+            animation: scan-line 3s linear infinite;
+        }
+
+        @keyframes scan-line {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(500px);
+            }
+        }
+
+        .classification-level h2 {
+            color: #ff0000;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            text-align: center;
+            margin-top: 0;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 1);
+            animation: glow-pulse 1s infinite alternate;
+        }
+
+        @keyframes glow-pulse {
+            from {
+                text-shadow: 0 0 15px rgba(255, 0, 0, 1);
+            }
+
+            to {
+                text-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 45px rgba(255, 0, 0, 0.8);
+            }
+        }
+
+        .warning-strip {
+            background: repeating-linear-gradient(45deg,
+                    #000000,
+                    #000000 20px,
+                    #ff0000 20px,
+                    #ff0000 40px);
+            height: 30px;
+            margin: 30px 0;
+            border: 3px solid #ff0000;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            animation: strip-move 2s linear infinite;
+        }
+
+        @keyframes strip-move {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 56px 56px;
+            }
+        }
+
+        .access-protocol {
+            background: linear-gradient(135deg, #1a0000 0%, #0a0000 100%);
+            border: 3px double #ff0000;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.7), inset 0 0 30px rgba(255, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .access-protocol::before,
+        .access-protocol::after {
+            content: "CLASSIFIED";
+            position: absolute;
+            font-size: 80px;
+            font-weight: bold;
+            opacity: 0.05;
+            transform: rotate(-45deg);
+            color: #ff0000;
+        }
+
+        .access-protocol::before {
+            top: 10%;
+            left: -5%;
+        }
+
+        .access-protocol::after {
+            bottom: 10%;
+            right: -5%;
+            transform: rotate(45deg);
+        }
+
+        .access-protocol h3 {
+            color: #ff0000;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            border-bottom: 3px solid #ff0000;
+            padding-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        }
+
+        .access-protocol ul {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .access-protocol li {
+            color: #ffcccc;
+            font-size: 16px;
+            padding: 15px;
+            margin: 15px 0;
+            background: rgba(139, 0, 0, 0.2);
+            border-left: 5px solid #ff0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .access-protocol li:hover {
+            background: rgba(139, 0, 0, 0.4);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+            transform: translateX(10px);
+        }
+
+        .access-protocol li::before {
+            content: "⚠️ ";
+            margin-right: 10px;
+            animation: warning-blink 2s infinite;
+        }
+
+        @keyframes warning-blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .critical-warning {
+            background: linear-gradient(135deg, #330000 0%, #1a0000 50%, #330000 100%);
+            border: 5px solid #ff0000;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 0 80px rgba(255, 0, 0, 1), inset 0 0 50px rgba(255, 0, 0, 0.2);
+            animation: critical-pulse 1.5s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes critical-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 80px rgba(255, 0, 0, 1), inset 0 0 50px rgba(255, 0, 0, 0.2);
+                border-color: #ff0000;
+            }
+
+            50% {
+                box-shadow: 0 0 120px rgba(255, 0, 0, 1), inset 0 0 80px rgba(255, 0, 0, 0.4);
+                border-color: #ff6666;
+            }
+        }
+
+        .critical-warning::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 0, 0, 0.1) 2px,
+                    rgba(255, 0, 0, 0.1) 4px);
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(40px);
+            }
+        }
+
+        .critical-warning strong {
+            display: block;
+            font-size: 32px;
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 1), 0 0 40px rgba(255, 0, 0, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+
+        .critical-warning p {
+            color: #ffcccc;
+            font-size: 18px;
+            line-height: 1.8;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .security-level-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%);
+            color: white;
+            padding: 15px 40px;
+            border: 4px solid #ff0000;
+            border-radius: 0;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 1);
+            animation: badge-glow 1s infinite alternate;
+            margin: 20px 0;
+        }
+
+        @keyframes badge-glow {
+            from {
+                box-shadow: 0 0 40px rgba(255, 0, 0, 1);
+            }
+
+            to {
+                box-shadow: 0 0 60px rgba(255, 0, 0, 1), 0 0 80px rgba(255, 0, 0, 0.8);
+            }
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+            border-bottom: 3px solid #ff0000;
+            box-shadow: 0 5px 30px rgba(255, 0, 0, 0.6);
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%);
+            color: white;
+            text-decoration: none;
+            border: 3px solid #ff0000;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            transition: all 0.3s ease;
+            animation: button-pulse 2s infinite;
+        }
+
+        @keyframes button-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(255, 0, 0, 1);
+            }
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            box-shadow: 0 0 60px rgba(255, 0, 0, 1);
+            transform: scale(1.05);
+        }
+
+        /* Scanline effect */
+        @keyframes scanline {
+            0% {
+                top: 0%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(transparent, rgba(255, 0, 0, 0.5), transparent);
+            animation: scanline 8s linear infinite;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+            border-top: 3px solid #ff0000;
+            box-shadow: 0 -5px 30px rgba(255, 0, 0, 0.6);
+        }
+
+        /* Red vignette effect */
+        .container::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 200px rgba(255, 0, 0, 0.2);
+            pointer-events: none;
+            z-index: -1;
         }
     </style>
 </head>
 
 <body>
+    <script>
+        // Prüfe Zugang beim Laden
+        window.onload = function () {
+            if (sessionStorage.getItem('frostlineAccess') !== 'granted') {
+                window.location.href = 'sicherheitsstufe-zugang.html';
+            }
+        };
+    </script>
+
+    <div class="top-secret-banner">
+        <h1>⚠️ SICHERHEITSSTUFE 5 - STRENG GEHEIM ⚠️</h1>
+        <p style="color: white; font-size: 20px; margin: 15px 0 0 0; font-weight: bold; letter-spacing: 3px;">
+            UNBEFUGTER ZUGRIFF WIRD STRAFRECHTLICH VERFOLGT
+        </p>
+    </div>
+
     <nav class="navbar">
         <div class="container">
             <div class="logo">
                 <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
-                <span class="logo-text">VANTERRA</span>
-                <span class="logo-tagline">Research & Development</span>
+                <span class="logo-text" style="color: #ff0000;">VANTERRA</span>
+                <span class="logo-tagline" style="color: #ffcccc;">Research & Development</span>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">Über uns</a></li>
-                <li><a href="contact.html">Kontakt</a></li>
-            </ul>
         </div>
     </nav>
 
-    <div class="container">
-        <!-- Zugriff verweigert Sektion -->
-        <div id="accessDenied" style="display: none;">
-            <section class="page-header">
-                <h1>🔒 Zugriff verweigert</h1>
-                <p>Sie haben keine Berechtigung für diese Seite.</p>
-            </section>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="admin.html" class="btn btn-primary">Zum Admin-Login</a>
+    <div class="warning-strip"></div>
+
+    <section class="content-section" style="background: #000000;">
+        <div class="container">
+            <div style="text-align: center; margin: 40px 0;">
+                <a href="admin.html" class="back-button">← ZURÜCK ZUM ADMIN-BEREICH</a>
+            </div>
+
+            <div class="classification-level">
+                <h2>🔴 KLASSIFIZIERUNGSSTUFE: STRENG GEHEIM 🔴</h2>
+                <div style="text-align: center; margin: 30px 0;">
+                    <span class="security-level-badge">LEVEL 5 CLEARANCE</span>
+                </div>
+                <p style="color: #ffcccc; text-align: center; font-size: 18px; line-height: 1.8; font-weight: bold;">
+                    Dieses Dokument enthält Informationen von höchster Vertraulichkeitsstufe.<br>
+                    Nur Personen mit entsprechender Sicherheitsfreigabe dürfen Zugang erhalten.<br>
+                    Jeder Zugriff wird protokolliert, überwacht und zur Anzeige gebracht.
+                </p>
+            </div>
+
+            <div class="warning-strip"></div>
+
+            <div class="access-protocol">
+                <h3>⚠️ ZUGANGSPROTOKOLL & SICHERHEITSRICHTLINIEN</h3>
+                <ul>
+                    <li>Alle Personen müssen eine aktive Sicherheitsfreigabe der Stufe 5 besitzen</li>
+                    <li>Jeder Zugriff erfordert eine biometrische Authentifizierung</li>
+                    <li>Dokumente dürfen NIEMALS kopiert, fotografiert oder weitergegeben werden</li>
+                    <li>Alle Kommunikation über diese Inhalte ist STRENG VERBOTEN</li>
+                    <li>Verstöße werden gemäß §§ 93, 95, 97 StGB strafrechtlich verfolgt</li>
+                    <li>Verdächtige Aktivitäten werden sofort an die Sicherheitsabteilung gemeldet</li>
+                    <li>Bei Verlust der Zugriffsberechtigung erfolgt sofortige Sperrung</li>
+                    <li>Dieser Bereich wird 24/7 elektronisch überwacht</li>
+                </ul>
+            </div>
+
+            <div class="warning-strip"></div>
+
+            <div class="critical-warning">
+                <strong>🚨 KRITISCHE WARNUNG 🚨</strong>
+                <p>
+                    SIE BEFINDEN SICH IM AM STRENGSTEN GESCHÜTZTEN BEREICH DER VANTERRA CORPORATION.<br><br>
+                    ALLE INFORMATIONEN HIER SIND VON NATIONALER UND INTERNATIONALER BEDEUTUNG.<br><br>
+                    UNBEFUGTER ZUGRIFF, WEITERGABE ODER VERBREITUNG DIESER INFORMATIONEN<br>
+                    WIRD MIT DER VOLLEN HÄRTE DES GESETZES VERFOLGT.<br><br>
+
+                <p style="color: #ffcccc; text-align: center; font-size: 16px; line-height: 1.8; font-weight: bold;">
+                    ⚡ SYSTEME AKTIV ⚡<br>
+                    Biometrische Scans: AKTIV<br>
+                    Verhaltensanalyse: AKTIV<br>
+                    Netzwerküberwachung: AKTIV<br>
+                    Videoaufzeichnung: AKTIV<br>
+                    Zugriffsprotokollierung: AKTIV<br><br>
+                    <span style="color: #ff0000; font-size: 20px;">
+                        IHRE AKTIVITÄTEN WERDEN VOLLSTÄNDIG AUFGEZEICHNET
+                    </span>
+                </p>
+            </div>
+
+            <div class="warning-strip"></div>
+
+            <!-- HOCHGESICHERTER DOWNLOAD-BEREICH -->
+            <div class="classification-level" style="margin-top: 40px;">
+                <h2>🔐 GESCHÜTZTER DOKUMENTENZUGRIFF 🔐</h2>
+                <p
+                    style="color: #ffcccc; text-align: center; font-size: 16px; line-height: 1.8; font-weight: bold; margin: 20px 0;">
+                    ⚠️ WARNUNG: STRENG VERTRAULICHES DOKUMENT ⚠️<br>
+                    Der Zugriff auf diese Datei wird vollständig protokolliert.<br>
+                    Unbefugte Downloads werden strafrechtlich verfolgt.
+                </p>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    <div id="downloadContainer" style="display: inline-block; position: relative;">
+                        <!-- Sicherheitswarnung Box -->
+                        <div id="securityWarning"
+                            style="background: linear-gradient(135deg, #330000 0%, #1a0000 100%); border: 3px solid #ff0000; padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 0 40px rgba(255, 0, 0, 0.6); animation: warning-pulse 2s infinite;">
+                            <h3
+                                style="color: #ff0000; margin: 0 0 15px 0; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);">
+                                ⚠️ SICHERHEITSPROTOKOLL AKTIV ⚠️
+                            </h3>
+                            <p style="color: #ffcccc; margin: 0; font-size: 14px; line-height: 1.6;">
+                                <strong>DOKUMENT:</strong> AKTE_final.pdf<br>
+                                <strong>KLASSIFIZIERUNG:</strong> STRENG VERTRAULICH - STUFE 5<br>
+                                <strong>ZUGRIFFSBERECHTIGUNG:</strong> Nur mit Admin-Clearance<br>
+                                <strong>PROTOKOLLIERUNG:</strong> Vollständig aktiviert
+                            </p>
+                        </div>
+
+                        <!-- Download Button (muss gedrückt gehalten werden) -->
+                        <button id="secureDownloadBtn" style="background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%);
+                                       color: white;
+                                       border: 3px solid #ff0000;
+                                       padding: 20px 50px;
+                                       font-size: 18px;
+                                       font-weight: bold;
+                                       text-transform: uppercase;
+                                       letter-spacing: 3px;
+                                       cursor: pointer;
+                                       border-radius: 8px;
+                                       box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+                                       transition: all 0.3s ease;
+                                       position: relative;
+                                       overflow: hidden;">
+                            <span id="btnText">🔒 DOKUMENT HERUNTERLADEN</span>
+                            <div id="holdProgress"
+                                style="position: absolute; bottom: 0; left: 0; height: 5px; width: 0%; background: #00ff00; transition: width 0.1s linear;">
+                            </div>
+                        </button>
+
+                        <!-- Instruktionen -->
+                        <p id="holdInstruction"
+                            style="color: #ffcccc; margin-top: 20px; font-size: 14px; font-weight: bold; text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);">
+                            ⚡ SICHERHEITSVERFAHREN: Button 3 Sekunden gedrückt halten ⚡
+                        </p>
+
+                        <!-- Countdown Anzeige -->
+                        <div id="countdownDisplay"
+                            style="display: none; color: #ff0000; font-size: 48px; font-weight: bold; margin-top: 20px; text-shadow: 0 0 20px rgba(255, 0, 0, 1); animation: pulse-text 1s infinite;">
+                            3
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sicherheitsbestätigung Modal -->
+                <div id="confirmModal"
+                    style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95);">
+                    <div
+                        style="background: linear-gradient(135deg, #1a0000 0%, #2c0000 100%); margin: 10% auto; padding: 40px; border: 5px solid #ff0000; border-radius: 8px; width: 80%; max-width: 600px; box-shadow: 0 0 80px rgba(255, 0, 0, 1); animation: modal-glow 2s infinite;">
+                        <h2
+                            style="color: #ff0000; text-align: center; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 15px rgba(255, 0, 0, 0.8); margin-bottom: 30px;">
+                            ⚠️ SICHERHEITSBESTÄTIGUNG ERFORDERLICH ⚠️
+                        </h2>
+                        <div
+                            style="background: rgba(139, 0, 0, 0.3); padding: 25px; border-left: 5px solid #ff0000; margin-bottom: 30px; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);">
+                            <p style="color: #ffcccc; line-height: 1.8; margin: 0; font-weight: bold;">
+                                Sie sind dabei, ein STRENG VERTRAULICHES Dokument der Sicherheitsstufe 5
+                                herunterzuladen.<br><br>
+                                <strong style="color: #ff0000;">⚡ WARNUNG:</strong><br>
+                                • Ihr Zugriff wird vollständig protokolliert<br>
+                                • IP-Adresse, Zeitstempel und Benutzer-ID werden gespeichert<br>
+                                • Unbefugte Weitergabe wird strafrechtlich verfolgt<br>
+                                • Verstoß gegen §§ 93, 95, 97 StGB<br><br>
+                                <strong style="color: #ff0000; font-size: 16px;">Bestätigen Sie, dass Sie zur Ansicht
+                                    berechtigt sind?</strong>
+                            </p>
+                        </div>
+                        <div style="text-align: center;">
+                            <button id="confirmYes"
+                                style="background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%); color: white; border: 3px solid #ff0000; padding: 15px 40px; margin: 10px; font-size: 16px; font-weight: bold; text-transform: uppercase; cursor: pointer; border-radius: 4px; letter-spacing: 2px;">
+                                ✓ BERECHTIGUNG BESTÄTIGEN
+                            </button>
+                            <button id="confirmNo"
+                                style="background: #333; color: white; border: 3px solid #666; padding: 15px 40px; margin: 10px; font-size: 16px; font-weight: bold; text-transform: uppercase; cursor: pointer; border-radius: 4px; letter-spacing: 2px;">
+                                ✗ ABBRECHEN
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zweite Bestätigung Modal -->
+                <div id="secondConfirmModal"
+                    style="display: none; position: fixed; z-index: 10001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95);">
+                    <div
+                        style="background: linear-gradient(135deg, #1a0000 0%, #2c0000 100%); margin: 10% auto; padding: 40px; border: 5px solid #ff0000; border-radius: 8px; width: 80%; max-width: 600px; box-shadow: 0 0 80px rgba(255, 0, 0, 1); animation: modal-glow 2s infinite;">
+                        <h2
+                            style="color: #ff0000; text-align: center; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 15px rgba(255, 0, 0, 0.8); margin-bottom: 30px;">
+                            ⚠️ LETZTE WARNUNG ⚠️
+                        </h2>
+                        <div
+                            style="background: rgba(139, 0, 0, 0.3); padding: 25px; border-left: 5px solid #ff0000; margin-bottom: 30px; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);">
+                            <p
+                                style="color: #ffcccc; line-height: 1.8; margin: 0; font-weight: bold; text-align: center; font-size: 18px;">
+                                <strong style="color: #ff0000; font-size: 20px;">🚨 KRITISCHE SICHERHEITSWARNUNG
+                                    🚨</strong><br><br>
+                                Dieser Download wird SOFORT an die Sicherheitsabteilung gemeldet.<br><br>
+                                Zeitstempel: <span id="timestamp" style="color: #ff4444;"></span><br>
+                                Sitzungs-ID: <span style="color: #ff4444;">SEC-</span><span id="sessionId"
+                                    style="color: #ff4444;"></span><br><br>
+                                <strong style="color: #ff0000; font-size: 20px;">Wirklich fortfahren?</strong>
+                            </p>
+                        </div>
+                        <div style="text-align: center;">
+                            <button id="finalConfirmYes"
+                                style="background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%); color: white; border: 3px solid #ff0000; padding: 15px 40px; margin: 10px; font-size: 16px; font-weight: bold; text-transform: uppercase; cursor: pointer; border-radius: 4px; letter-spacing: 2px;">
+                                ⚡ DOWNLOAD STARTEN
+                            </button>
+                            <button id="finalConfirmNo"
+                                style="background: #333; color: white; border: 3px solid #666; padding: 15px 40px; margin: 10px; font-size: 16px; font-weight: bold; text-transform: uppercase; cursor: pointer; border-radius: 4px; letter-spacing: 2px;">
+                                ✗ ABBRECHEN
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download Erfolg Nachricht -->
+                <div id="downloadSuccess"
+                    style="display: none; background: linear-gradient(135deg, #1a0000 0%, #2c0000 100%); border: 3px solid #ff0000; padding: 30px; border-radius: 8px; margin-top: 30px; text-align: center; box-shadow: 0 0 40px rgba(255, 0, 0, 0.6); animation: success-pulse 2s infinite;">
+                    <h3
+                        style="color: #ff0000; margin: 0 0 15px 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);">
+                        ✓ DOWNLOAD AUTORISIERT
+                    </h3>
+                    <p style="color: #ffcccc; margin: 0; font-size: 16px; line-height: 1.8; font-weight: bold;">
+                        Zugriff protokolliert und an Sicherheitsabteilung gemeldet.<br>
+                        Dokument wird heruntergeladen...<br><br>
+                        <span style="color: #ff4444;">⚡ ACHTUNG: Dokument unterliegt strengster Geheimhaltung! ⚡</span>
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 60px 0;">
+                <a href="admin.html" class="back-button">← SICHERER BEREICH VERLASSEN</a>
             </div>
         </div>
+    </section>
 
-        <!-- Passwort-Eingabe Sektion -->
-        <div id="securityCheck" class="security-container" style="display: none;">
-            <div class="security-header">
-                <h2>🔐 SICHERHEITSPROTOKOLL STUFE 5</h2>
-                <p>Drei Sicherheitsschlüssel erforderlich</p>
-            </div>
-
-            <div class="warning-banner">
-                <strong>⚠️ WARNUNG:</strong> Unbefugter Zugriff wird protokolliert und strafrechtlich verfolgt.
-            </div>
-
-            <form id="securityForm" onsubmit="return validateKeys(event)">
-                <div class="key-input-group">
-                    <label for="key1">🔑 Sicherheitsschlüssel Alpha</label>
-                    <div class="key-input-wrapper">
-                        <input type="text" id="key1" placeholder="XXX-XXX-XXX" maxlength="11" required>
-                        <span class="validation-icon" id="icon1"></span>
-                    </div>
-                    <p class="success-message" id="success1">✓ Schlüssel Alpha akzeptiert</p>
-                    <p class="individual-error" id="error1">✗ Schlüssel Alpha ungültig</p>
-                </div>
-
-                <div class="key-input-group">
-                    <label for="key2">🔑 Sicherheitsschlüssel Beta</label>
-                    <div class="key-input-wrapper">
-                        <input type="text" id="key2" placeholder="XXX-XXX-XXX" maxlength="11" required>
-                        <span class="validation-icon" id="icon2"></span>
-                    </div>
-                    <p class="success-message" id="success2">✓ Schlüssel Beta akzeptiert</p>
-                    <p class="individual-error" id="error2">✗ Schlüssel Beta ungültig</p>
-                </div>
-
-                <div class="key-input-group">
-                    <label for="key3">🔑 Sicherheitsschlüssel Gamma</label>
-                    <div class="key-input-wrapper">
-                        <input type="text" id="key3" placeholder="XXX-XXX-XXX" maxlength="11" required>
-                        <span class="validation-icon" id="icon3"></span>
-                    </div>
-                    <p class="success-message" id="success3">✓ Schlüssel Gamma akzeptiert</p>
-                    <p class="individual-error" id="error3">✗ Schlüssel Gamma ungültig</p>
-                </div>
-
-                <button type="submit" class="unlock-button">🔓 ZUGRIFF FREISCHALTEN</button>
-                <p class="error-message" id="errorMessage">Nicht alle Sicherheitsschlüssel sind korrekt!</p>
-            </form>
-        </div>
-
-        <!-- Geheime Inhalte -->
-        <div id="secretContent" class="secret-content">
-            <div class="secret-header">
-                <div class="success-icon">✅</div>
-                <h1>ZUGRIFF GEWÄHRT</h1>
-                <p>Klassifizierungsstufe: TOP SECRET</p>
-            </div>
-
-            <section class="content-section">
-                <div class="classified-box">
-                    <h3>📋 PROJEKT FROSTLINE - FINALE DOKUMENTATION</h3>
-                    <p><strong>Klassifizierung:</strong> Streng Geheim</p>
-                    <p><strong>Verantwortlich:</strong> Dr. Emil Carvon</p>
-                    <p><strong>Status:</strong> [ZENSIERT]</p>
-                    <hr>
-                    <p>Sie haben erfolgreich Zugriff auf die höchste Sicherheitsstufe erhalten.
-                        Alle Informationen in diesem Bereich sind als STRENG VERTRAULICH klassifiziert.</p>
-                </div>
-
-                <div class="classified-box">
-                    <h3>🧬 WICHTIGE ERKENNTNISSE</h3>
-                    <p>Das Projekt Frostline hat seine finalen Entwicklungsphasen erreicht.
-                        Die Ergebnisse übertreffen alle Erwartungen, bergen jedoch erhebliche [ZENSIERT].</p>
-                    <p><strong>Empfehlung:</strong> Sofortige Einstellung aller Experimente der Abteilung X7.</p>
-                </div>
-
-                <div class="classified-box">
-                    <h3>⚠️ SICHERHEITSHINWEIS</h3>
-                    <p>Diese Informationen dürfen unter keinen Umständen das Gebäude verlassen.
-                        Jede Weitergabe wird als Hochverrat behandelt.</p>
-                    <p><strong>Autorisiert durch:</strong> VANTERRA Sicherheitsrat</p>
-                    <p><strong>Dokumenten-ID:</strong> TS-7832-FINAL</p>
-                </div>
-
-                <div style="text-align: center; margin-top: 40px;">
-                    <a href="index.html" class="btn btn-secondary">Zur Startseite zurückkehren</a>
-                </div>
-            </section>
-        </div>
-    </div>
+    <div class="warning-strip"></div>
 
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>VANTERRA</h4>
-                    <p>Innovation. Forschung. Zukunft.</p>
+                    <h4 style="color: #ff0000;">VANTERRA</h4>
+                    <p style="color: #ffcccc;">Klassifiziert. Vertraulich. Streng Geheim.</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Rechtliches</h4>
-                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                    <h4 style="color: #ff0000;">Sicherheitshinweis</h4>
+                    <p style="color: #ffcccc;">© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                    <p style="color: #ff0000; font-weight: bold;">⚠️ SICHERHEITSSTUFE 5 - STRENG GEHEIM ⚠️</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Die drei korrekten Passwörter (anpassen nach Bedarf)
-        const correctKeys = {
-            key1: '572-070-305',  // Ersetze mit deinem ersten Passwort
-            key2: '110-193-572',  // Ersetze mit deinem zweiten Passwort
-            key3: 'ZZZ-ZZZ-ZZZ'   // Ersetze mit deinem dritten Passwort
-        };
+        // Secure Download System
+        let holdTimer = null;
+        let holdProgress = 0;
+        const HOLD_DURATION = 3000; // 3 Sekunden
+        const btn = document.getElementById('secureDownloadBtn');
+        const progressBar = document.getElementById('holdProgress');
+        const btnText = document.getElementById('btnText');
+        const holdInstruction = document.getElementById('holdInstruction');
+        const countdownDisplay = document.getElementById('countdownDisplay');
+        const confirmModal = document.getElementById('confirmModal');
+        const secondConfirmModal = document.getElementById('secondConfirmModal');
+        const downloadSuccess = document.getElementById('downloadSuccess');
 
-        // Validiere einzelnes Passwort in Echtzeit
-        function validateSingleKey(keyNumber) {
-            const input = document.getElementById('key' + keyNumber);
-            const icon = document.getElementById('icon' + keyNumber);
-            const successMsg = document.getElementById('success' + keyNumber);
-            const errorMsg = document.getElementById('error' + keyNumber);
-            const value = input.value.trim();
+        // Button gedrückt halten
+        btn.addEventListener('mousedown', startHold);
+        btn.addEventListener('mouseup', cancelHold);
+        btn.addEventListener('mouseleave', cancelHold);
+        btn.addEventListener('touchstart', startHold);
+        btn.addEventListener('touchend', cancelHold);
 
-            // Nur validieren wenn vollständig (11 Zeichen mit Bindestrichen)
-            if (value.length === 11) {
-                if (value === correctKeys['key' + keyNumber]) {
-                    // Korrekt
-                    input.classList.remove('incorrect');
-                    input.classList.add('correct');
-                    icon.textContent = '✓';
-                    icon.style.color = '#27ae60';
-                    icon.style.display = 'block';
-                    successMsg.style.display = 'block';
-                    errorMsg.style.display = 'none';
-                } else {
-                    // Falsch
-                    input.classList.remove('correct');
-                    input.classList.add('incorrect');
-                    icon.textContent = '✗';
-                    icon.style.color = '#e74c3c';
-                    icon.style.display = 'block';
-                    successMsg.style.display = 'none';
-                    errorMsg.style.display = 'block';
+        function startHold(e) {
+            e.preventDefault();
+            holdProgress = 0;
+            countdownDisplay.style.display = 'block';
+            holdInstruction.style.display = 'none';
+
+            const startTime = Date.now();
+
+            holdTimer = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                holdProgress = Math.min((elapsed / HOLD_DURATION) * 100, 100);
+                progressBar.style.width = holdProgress + '%';
+
+                // Countdown aktualisieren
+                const secondsLeft = Math.ceil((HOLD_DURATION - elapsed) / 1000);
+                countdownDisplay.textContent = secondsLeft;
+
+                if (holdProgress >= 100) {
+                    completeHold();
                 }
-            } else {
-                // Noch nicht vollständig
-                input.classList.remove('correct', 'incorrect');
-                icon.style.display = 'none';
-                successMsg.style.display = 'none';
-                errorMsg.style.display = 'none';
+            }, 100);
+        }
+
+        function cancelHold() {
+            if (holdTimer) {
+                clearInterval(holdTimer);
+                holdTimer = null;
+                progressBar.style.width = '0%';
+                countdownDisplay.style.display = 'none';
+                holdInstruction.style.display = 'block';
+                btnText.textContent = '🔒 DOKUMENT HERUNTERLADEN';
             }
         }
 
-        function validateKeys(event) {
-            event.preventDefault();
+        function completeHold() {
+            clearInterval(holdTimer);
+            holdTimer = null;
+            btnText.textContent = '✓ AUTORISIERUNG ERFOLGREICH';
+            btn.style.background = 'linear-gradient(135deg, #006400 0%, #00ff00 100%)';
+            btn.style.borderColor = '#00ff00';
+            btn.style.boxShadow = '0 0 30px rgba(0, 255, 0, 0.8)';
 
-            const key1 = document.getElementById('key1').value.trim();
-            const key2 = document.getElementById('key2').value.trim();
-            const key3 = document.getElementById('key3').value.trim();
-            const errorMsg = document.getElementById('errorMessage');
-
-            // Validierung der Passwörter
-            if (key1 === correctKeys.key1 &&
-                key2 === correctKeys.key2 &&
-                key3 === correctKeys.key3) {
-
-                // Erfolgreicher Zugriff
-                document.getElementById('securityCheck').style.display = 'none';
-                document.getElementById('secretContent').style.display = 'block';
-                errorMsg.style.display = 'none';
-
-                // Speichere Zugriff in sessionStorage
-                sessionStorage.setItem('topSecretAccess', 'true');
-            } else {
-                // Fehlgeschlagener Zugriff
-                errorMsg.style.display = 'block';
-
-                // Validiere jedes Feld einzeln
-                validateSingleKey(1);
-                validateSingleKey(2);
-                validateSingleKey(3);
-            }
+            // Erste Bestätigung nach kurzer Verzögerung
+            setTimeout(() => {
+                confirmModal.style.display = 'block';
+            }, 500);
         }
 
-        // Auto-Format für Bindestriche und Echtzeit-Validierung
-        ['key1', 'key2', 'key3'].forEach((id, index) => {
-            const keyNumber = index + 1;
-            document.getElementById(id).addEventListener('input', function (e) {
-                let value = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
-                if (value.length > 3) value = value.slice(0, 3) + '-' + value.slice(3);
-                if (value.length > 7) value = value.slice(0, 7) + '-' + value.slice(7);
-                if (value.length > 11) value = value.slice(0, 11);
-                e.target.value = value.toUpperCase();
+        // Erste Bestätigung
+        document.getElementById('confirmYes').addEventListener('click', () => {
+            confirmModal.style.display = 'none';
 
-                // Validiere in Echtzeit
-                validateSingleKey(keyNumber);
-            });
+            // Zeitstempel und Session-ID generieren
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toLocaleString('de-DE');
+            document.getElementById('sessionId').textContent = Math.random().toString(36).substr(2, 9).toUpperCase();
 
-            // Validiere auch beim Verlassen des Feldes
-            document.getElementById(id).addEventListener('blur', function () {
-                validateSingleKey(keyNumber);
-            });
+            // Zweite Bestätigung zeigen
+            setTimeout(() => {
+                secondConfirmModal.style.display = 'block';
+            }, 300);
         });
 
-        // Prüfe Admin-Berechtigung beim Laden der Seite
-        window.onload = function () {
-            // Prüfe ob Admin eingeloggt ist
-            if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
-                // Kein Admin-Zugriff - zeige Zugriff verweigert
-                document.getElementById('accessDenied').style.display = 'block';
-                document.getElementById('securityCheck').style.display = 'none';
-                document.getElementById('secretContent').style.display = 'none';
-                return;
-            }
+        document.getElementById('confirmNo').addEventListener('click', () => {
+            confirmModal.style.display = 'none';
+            resetButton();
+        });
 
-            // Admin ist eingeloggt - prüfe ob bereits Top Secret Zugriff gewährt
-            if (sessionStorage.getItem('topSecretAccess') === 'true') {
-                document.getElementById('securityCheck').style.display = 'none';
-                document.getElementById('secretContent').style.display = 'block';
-                document.getElementById('accessDenied').style.display = 'none';
-            } else {
-                // Zeige Passwort-Eingabe
-                document.getElementById('securityCheck').style.display = 'block';
-                document.getElementById('secretContent').style.display = 'none';
-                document.getElementById('accessDenied').style.display = 'none';
-            }
+        // Finale Bestätigung
+        document.getElementById('finalConfirmYes').addEventListener('click', () => {
+            secondConfirmModal.style.display = 'none';
+
+            // Download starten
+            const link = document.createElement('a');
+            link.href = 'documents/AKTE_final.pdf';
+            link.download = 'AKTE_final.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Erfolgs-Nachricht anzeigen
+            downloadSuccess.style.display = 'block';
+
+            // Button zurücksetzen nach 5 Sekunden
+            setTimeout(() => {
+                downloadSuccess.style.display = 'none';
+                resetButton();
+            }, 5000);
+        });
+
+        document.getElementById('finalConfirmNo').addEventListener('click', () => {
+            secondConfirmModal.style.display = 'none';
+            resetButton();
+        });
+
+        function resetButton() {
+            progressBar.style.width = '0%';
+            countdownDisplay.style.display = 'none';
+            holdInstruction.style.display = 'block';
+            btnText.textContent = '🔒 DOKUMENT HERUNTERLADEN';
+            btn.style.background = 'linear-gradient(135deg, #8b0000 0%, #ff0000 100%)';
+            btn.style.borderColor = '#ff0000';
+            btn.style.boxShadow = '0 0 30px rgba(255, 0, 0, 0.8)';
         }
+
+        // CSS Animationen hinzufügen
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse-text {
+                0%, 100% { opacity: 1; transform: scale(1); }
+                50% { opacity: 0.7; transform: scale(1.1); }
+            }
+            @keyframes success-pulse {
+                0%, 100% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.6); }
+                50% { box-shadow: 0 0 60px rgba(255, 0, 0, 0.9); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 

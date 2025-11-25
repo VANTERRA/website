@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             // Easter Egg: Prüfe auf spezielle Eingaben
-            const specialName = 'Wolfgang Dietrich';
+            const specialName = 'Jonas Reuter';
             const specialMessage = 'Video Chimera';
 
             if (data.name === specialName && data.message.includes(specialMessage)) {

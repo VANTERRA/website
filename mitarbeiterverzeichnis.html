@@ -7,12 +7,51 @@
     <title>Mitarbeiterverzeichnis - VANTERRA</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
+        .classified-header {
+            background: linear-gradient(135deg, #1a0000 0%, #4a0000 100%);
+            color: #ff0000;
+            padding: 20px;
+            text-align: center;
+            border: 3px solid #ff0000;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            animation: glow-pulse 2s infinite;
+        }
+
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+            }
+        }
+
+        .classified-header h1 {
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        }
+
+        .classified-header p {
+            color: #ffcccc;
+            margin: 10px 0 0 0;
+            font-weight: bold;
+        }
+
         .employee-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
             background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.2);
+            border: 2px solid #ff0000;
         }
 
         .employee-table th,
@@ -23,27 +62,35 @@
         }
 
         .employee-table th {
-            background: #2c3e50;
+            background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%);
             color: white;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .employee-table tr:hover {
-            background: #f5f5f5;
+            background: #fff0f0;
+            box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.1);
         }
 
         .back-button {
             display: inline-block;
             padding: 10px 20px;
-            background: #2c3e50;
+            background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%);
             color: white;
             text-decoration: none;
             border-radius: 4px;
             margin-bottom: 20px;
+            border: 2px solid #ff0000;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .back-button:hover {
-            background: #34495e;
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
         }
 
         .access-denied {
@@ -56,10 +103,12 @@
             cursor: pointer;
             color: inherit;
             text-decoration: none;
+            position: relative;
         }
 
         .hidden-link:hover {
-            color: inherit;
+            color: #8b0000;
+            font-weight: bold;
         }
 
         .secret-modal {
@@ -70,31 +119,97 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.9);
         }
 
         .secret-modal-content {
-            background-color: #fefefe;
+            background: linear-gradient(135deg, #1a0000 0%, #2c0000 100%);
+            color: #ffcccc;
             margin: 10% auto;
-            padding: 30px;
-            border: 2px solid #888;
+            padding: 40px;
+            border: 3px solid #ff0000;
             border-radius: 8px;
             width: 80%;
             max-width: 600px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+            animation: modal-glow 2s infinite;
+        }
+
+        @keyframes modal-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+            }
+
+            50% {
+                box-shadow: 0 0 80px rgba(255, 0, 0, 1);
+            }
+        }
+
+        .secret-modal-content h2 {
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        }
+
+        .secret-modal-content hr {
+            border: 1px solid #ff0000;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
         }
 
         .secret-close {
-            color: #aaa;
+            color: #ff0000;
             float: right;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
         }
 
         .secret-close:hover,
         .secret-close:focus {
-            color: #000;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 1);
+        }
+
+        .security-warning {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #1a0000 0%, #330000 100%);
+            border: 3px solid #ff0000;
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+            animation: warning-pulse 3s infinite;
+        }
+
+        @keyframes warning-pulse {
+
+            0%,
+            100% {
+                border-color: #ff0000;
+                box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+            }
+
+            50% {
+                border-color: #ff4444;
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.7);
+            }
+        }
+
+        .security-warning strong {
+            color: #ff0000;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+        }
+
+        .security-warning p {
+            color: #ffcccc;
+            margin-top: 10px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -123,10 +238,11 @@
         </div>
 
         <div id="employeeContent" style="display: none;">
-            <section class="page-header">
-                <h1>Mitarbeiterverzeichnis</h1>
-                <p>Vertrauliche Mitarbeiterdaten - Nur für autorisiertes Personal</p>
-            </section>
+            <div class="classified-header">
+                <h1>⚠️ STRENG VERTRAULICH ⚠️</h1>
+                <p>MITARBEITERVERZEICHNIS - SICHERHEITSSTUFE 5</p>
+                <p>UNBEFUGTER ZUGRIFF WIRD PROTOKOLLIERT UND STRAFRECHTLICH VERFOLGT</p>
+            </div>
 
             <section class="content-section">
                 <a href="admin.html" class="back-button">← Zurück zum Admin-Bereich</a>
@@ -625,10 +741,10 @@
                         </tr>
                         <tr>
                             <td>157</td>
-                            <td>Kevin Scholze</td>
+                            <td>Thomas Kolti</td>
                             <td>Hausmeister</td>
                             <td>Wartung</td>
-                            <td>k.scholze@vanterra.com</td>
+                            <td>t.kolti@vanterra.com</td>
                             <td>Level 1</td>
                         </tr>
                         <tr>
@@ -641,10 +757,10 @@
                         </tr>
                         <tr>
                             <td>159</td>
-                            <td>Dr. Wolfgang Dietrich</td>
+                            <td>Dr. Jonas Reuter</td>
                             <td>Klinischer Forscher</td>
                             <td>Abteilung X7</td>
-                            <td>w.dietrich@vanterra.com</td>
+                            <td>j.reuter@vanterra.com</td>
                             <td>Level 4</td>
                         </tr>
                         <tr>
@@ -978,11 +1094,12 @@
                     </tbody>
                 </table>
 
-                <div
-                    style="margin-top: 30px; padding: 20px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
-                    <strong>⚠️ Sicherheitshinweis:</strong>
-                    <p>Diese Informationen sind streng vertraulich. Unbefugte Weitergabe wird strafrechtlich verfolgt.
-                    </p>
+                <div class="security-warning">
+                    <strong>⚠️ SICHERHEITSHINWEIS - STUFE 5</strong>
+                    <p>Diese Informationen unterliegen höchster Geheimhaltung. Jeder Zugriff wird protokolliert und
+                        überwacht. Unbefugte Weitergabe wird gemäß §§ 93, 95, 97 StGB strafrechtlich verfolgt.</p>
+                    <p style="color: #ff4444; margin-top: 15px;">⚡ WARNUNG: Alle Aktivitäten auf dieser Seite werden in
+                        Echtzeit überwacht ⚡</p>
                 </div>
             </section>
         </div>
@@ -992,14 +1109,18 @@
     <div id="secretModal" class="secret-modal">
         <div class="secret-modal-content">
             <span class="secret-close">&times;</span>
-            <h2>🔍 Vertrauliche Notiz</h2>
-            <p><strong>Betreff:</strong> Judith Stein - Interne Aufzeichnung</p>
+            <h2>🔍 VERTRAULICHE NOTIZ - KLASSIFIZIERT</h2>
+            <p><strong>SICHERHEITSSTUFE:</strong> 5 - STRENG VERTRAULICH</p>
+            <p><strong>Betreff:</strong> Judith Stein - Interne Sicherheitsaufzeichnung</p>
             <hr>
-            <p>Judith hat in letzter Zeit ungewöhnliche Aktivitäten im Compliance-System gezeigt.
+            <p>⚠️ WARNUNG: Judith hat in letzter Zeit ungewöhnliche Aktivitäten im Compliance-System gezeigt.
                 Sie scheint sich besonders für die Dokumente von Projekt Frostline zu interessieren,
                 obwohl dies nicht zu ihrem direkten Aufgabenbereich gehört.</p>
-            <p><strong>Empfehlung:</strong> Anrufen und Aktivitäten überwachen. 1234556.</p>
-            <p style="color: #e74c3c; margin-top: 20px;"><em>- Dr. Emil Carvon, vertraulich</em></p>
+            <p><strong>STATUS:</strong> UNTER BEOBACHTUNG</p>
+            <p><strong>MASSNAHME:</strong> Sofortige Kontaktaufnahme erforderlich: +49 171 9343465</p>
+            <p style="color: #ff4444; margin-top: 20px; font-weight: bold;">
+                <em>⚡ KLASSIFIZIERT - Dr. Emil Carvon - NICHT WEITERGEBEN ⚡</em>
+            </p>
         </div>
     </div>
 

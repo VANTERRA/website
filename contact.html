@@ -6,6 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt - VANTERRA</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .info-box.dark {
+            background: linear-gradient(135deg, #1a0000 0%, #2c0000 100%);
+            border: 3px solid #ff0000;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+            animation: warning-glow 3s infinite;
+        }
+
+        @keyframes warning-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(255, 0, 0, 0.7);
+            }
+        }
+
+        .info-box.dark h3 {
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+        }
+
+        .info-box.dark p {
+            color: #ffcccc;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -130,7 +162,8 @@
                     <h4>Intern</h4>
                     <p><a href="employee.html" class="footer-link">Mitarbeiterbereich</a></p>
                     <p><a href="admin.html" class="footer-link">Admin-Bereich</a></p>
-                    <p id="hausmeisterLink" style="display: none;">Hausmeister</p>
+                    <p id="hausmeisterLink" style="display: none;"><a href="hausmeister.html"
+                            class="footer-link">Hausmeister</a></p>
                 </div>
             </div>
         </div>
