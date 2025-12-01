@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Easter Egg: Prüfe auf spezielle Eingaben
             const specialName = 'Jonas Reuter';
-            const specialMessage = 'Video Chimera';
+            const specialMessage = 'Projekt Chimera';
 
             if (data.name === specialName && data.message.includes(specialMessage)) {
                 console.log('%c🔓 GEHEIMER VIDEOZUGANG ERKANNT', 'color: #00ff00; font-size: 18px; font-weight: bold;');
