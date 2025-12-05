@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systemstatistiken - VANTERRA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .classified-header {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+            color: #3498db;
+            padding: 20px;
+            text-align: center;
+            border: 3px solid #3498db;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.5);
+            animation: glow-pulse 2s infinite;
+        }
+
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(52, 152, 219, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(52, 152, 219, 0.8);
+            }
+        }
+
+        .classified-header h1 {
+            color: #3498db;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+        }
+
+        .classified-header p {
+            color: #a8d5f2;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+            border-color: #3498db;
+        }
+
+        .stat-card .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+        }
+
+        .stat-card h3 {
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card .value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #3498db;
+            margin: 15px 0;
+        }
+
+        .stat-card .description {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .stat-card.danger {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .stat-card.warning {
+            border-left: 4px solid #f39c12;
+        }
+
+        .stat-card.success {
+            border-left: 4px solid #27ae60;
+        }
+
+        .stat-card.info {
+            border-left: 4px solid #3498db;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .chart-container h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .progress-bar {
+            background: #ecf0f1;
+            border-radius: 10px;
+            height: 30px;
+            overflow: hidden;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transition: width 1s ease;
+        }
+
+        .progress-label {
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .activity-log {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .activity-log h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .log-entry {
+            padding: 12px;
+            border-left: 3px solid #3498db;
+            background: #f8f9fa;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .log-entry .timestamp {
+            color: #7f8c8d;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .log-entry .message {
+            color: #2c3e50;
+        }
+
+        .log-entry.warning {
+            border-left-color: #f39c12;
+            background: #fef5e7;
+        }
+
+        .log-entry.error {
+            border-left-color: #e74c3c;
+            background: #fadbd8;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #3498db;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .access-denied {
+            display: none;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .system-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .status-indicator {
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .status-indicator.online {
+            background: #d5f4e6;
+            color: #27ae60;
+        }
+
+        .status-indicator.offline {
+            background: #fadbd8;
+            color: #e74c3c;
+        }
+
+        .status-indicator.maintenance {
+            background: #fef5e7;
+            color: #f39c12;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="accessDenied" class="access-denied">
+            <h1>🔒 Zugriff verweigert</h1>
+            <p>Sie haben keine Berechtigung für diese Seite.</p>
+            <a href="admin.html" class="back-button">Zum Login</a>
+        </div>
+
+        <div id="statsContent" style="display: none;">
+            <div class="classified-header">
+                <h1>⚙️ SYSTEMSTATISTIKEN</h1>
+                <p>ECHTZEIT-MONITORING - SICHERHEITSSTUFE 5</p>
+            </div>
+
+            <section class="content-section">
+                <a href="admin.html" class="back-button">← Zurück zum Admin-Bereich</a>
+
+                <h2>🟢 Systemstatus</h2>
+                <div class="system-status">
+                    <div class="status-indicator online">
+                        ✓ Hauptserver Online
+                    </div>
+                    <div class="status-indicator online">
+                        ✓ Datenbank Aktiv
+                    </div>
+                    <div class="status-indicator online">
+                        ✓ Backup-System Bereit
+                    </div>
+                    <div class="status-indicator maintenance">
+                        ⚠ Firewall-Update
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">📊 Wichtige Kennzahlen</h2>
+                <div class="stats-grid">
+                    <div class="stat-card info">
+                        <div class="icon">👥</div>
+                        <h3>Aktive Benutzer</h3>
+                        <div class="value">247</div>
+                        <div class="description">Mitarbeiter im System</div>
+                    </div>
+
+                    <div class="stat-card success">
+                        <div class="icon">📁</div>
+                        <h3>Gespeicherte Dateien</h3>
+                        <div class="value">12,458</div>
+                        <div class="description">Dokumente im Archiv</div>
+                    </div>
+
+                    <div class="stat-card warning">
+                        <div class="icon">🔐</div>
+                        <h3>Login-Versuche</h3>
+                        <div class="value">1,234</div>
+                        <div class="description">Heute</div>
+                    </div>
+
+                    <div class="stat-card danger">
+                        <div class="icon">⚠️</div>
+                        <h3>Sicherheitswarnungen</h3>
+                        <div class="value">3</div>
+                        <div class="description">Letzte 24 Stunden</div>
+                    </div>
+
+                    <div class="stat-card info">
+                        <div class="icon">💾</div>
+                        <h3>Speicherplatz</h3>
+                        <div class="value">78%</div>
+                        <div class="description">Belegt (2.3 TB / 3 TB)</div>
+                    </div>
+
+                    <div class="stat-card success">
+                        <div class="icon">⚡</div>
+                        <h3>Uptime</h3>
+                        <div class="value">99.8%</div>
+                        <div class="description">Letzter Monat</div>
+                    </div>
+
+                    <div class="stat-card info">
+                        <div class="icon">🌐</div>
+                        <h3>API-Anfragen</h3>
+                        <div class="value">45.2K</div>
+                        <div class="description">Heute</div>
+                    </div>
+
+                    <div class="stat-card warning">
+                        <div class="icon">🔄</div>
+                        <h3>Backup-Status</h3>
+                        <div class="value">2h</div>
+                        <div class="description">Letztes Backup</div>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">📈 Systemauslastung</h2>
+                <div class="chart-container">
+                    <h3>Ressourcennutzung</h3>
+
+                    <div class="progress-label">CPU-Auslastung</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%">45%</div>
+                    </div>
+
+                    <div class="progress-label">RAM-Nutzung</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 67%">67%</div>
+                    </div>
+
+                    <div class="progress-label">Netzwerk-Bandbreite</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 32%">32%</div>
+                    </div>
+
+                    <div class="progress-label">Datenbank-Auslastung</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 54%">54%</div>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 40px;">📋 Aktivitätsprotokoll</h2>
+                <div class="activity-log">
+                    <h3>Letzte Systemereignisse</h3>
+
+                    <div class="log-entry">
+                        <div class="timestamp">2025-12-19 14:32:15</div>
+                        <div class="message">✓ Backup erfolgreich abgeschlossen (2.3 TB)</div>
+                    </div>
+
+                    <div class="log-entry">
+                        <div class="timestamp">2025-12-19 13:45:22</div>
+                        <div class="message">👤 Admin-Login: Dr. Emil Carvon (IP: 192.168.1.45)</div>
+                    </div>
+
+                    <div class="log-entry warning">
+                        <div class="timestamp">2025-12-19 12:18:03</div>
+                        <div class="message">⚠️ Ungewöhnliche Zugriffsmuster auf Projekt Frostline erkannt</div>
+                    </div>
+
+                    <div class="log-entry">
+                        <div class="timestamp">2025-12-19 11:22:47</div>
+                        <div class="message">📁 Neue Dateien hochgeladen: Forschungsbericht_X7_Q4.pdf</div>
+                    </div>
+
+                    <div class="log-entry error">
+                        <div class="timestamp">2025-12-19 10:05:19</div>
+                        <div class="message">❌ Fehlgeschlagener Login-Versuch (Benutzer: j.stein)</div>
+                    </div>
+
+                    <div class="log-entry">
+                        <div class="timestamp">2025-12-19 09:30:12</div>
+                        <div class="message">🔄 Systemupdate erfolgreich installiert (Version 4.2.8)</div>
+                    </div>
+
+                    <div class="log-entry warning">
+                        <div class="timestamp">2025-12-19 08:15:33</div>
+                        <div class="message">⚠️ Firewall-Regel aktualisiert - Port 8443 geschlossen</div>
+                    </div>
+
+                    <div class="log-entry">
+                        <div class="timestamp">2025-12-19 07:00:00</div>
+                        <div class="message">✓ Automatische Systemprüfung abgeschlossen - Keine Fehler</div>
+                    </div>
+                </div>
+
+                <div class="info-box dark" style="margin-top: 30px;">
+                    <h3>⚠️ SICHERHEITSHINWEIS</h3>
+                    <p>Alle Systemzugriffe werden protokolliert und überwacht. Bei verdächtigen Aktivitäten erfolgt eine
+                        automatische Benachrichtigung des Sicherheitsteams. Unbefugter Zugriff wird strafrechtlich
+                        verfolgt.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Prüfe ob Admin eingeloggt ist
+        window.onload = function () {
+            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+                document.getElementById('statsContent').style.display = 'block';
+                document.getElementById('accessDenied').style.display = 'none';
+            } else {
+                document.getElementById('statsContent').style.display = 'none';
+                document.getElementById('accessDenied').style.display = 'block';
+            }
+        }
+    </script>
+    <script src="js/snow.js"></script>
+</body>
+
+</html>

@@ -415,6 +415,37 @@
             color: white;
             box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
         }
+
+        /* Unsichtbare Katzen-Card */
+        .admin-card-hidden {
+            opacity: 0;
+            cursor: pointer;
+            position: relative;
+            background: transparent;
+            border: 3px solid transparent;
+        }
+
+        .admin-card-hidden:hover {
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-card-hidden::after {
+            content: '🐱';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .admin-card-hidden:hover::after {
+            opacity: 0.3;
+        }
     </style>
 </head>
 
@@ -485,7 +516,7 @@
                             <div class="icon">📊</div>
                             <h3>Systemstatistiken</h3>
                             <p>Echtzeit-Monitoring, Performance-Metriken und Aktivitätsprotokolle</p>
-                            <a href="#" class="btn btn-primary">Öffnen</a>
+                            <a href="systemstatistiken.html" class="btn btn-primary">Öffnen</a>
                         </div>
 
                         <div class="admin-card">
@@ -493,15 +524,7 @@
                             <div class="icon">🔧</div>
                             <h3>Systemeinstellungen</h3>
                             <p>Konfiguration und Verwaltung der Systemparameter</p>
-                            <a href="#" class="btn btn-primary">Öffnen</a>
-                        </div>
-
-                        <div class="admin-card">
-                            <div class="badge badge-level-3">📋 Sicherheitsstufe 3</div>
-                            <div class="icon">📝</div>
-                            <h3>Protokolle</h3>
-                            <p>Systemlogs und detaillierte Aktivitätsprotokolle einsehen</p>
-                            <a href="#" class="btn btn-primary">Öffnen</a>
+                            <a href="systemeinstellungen.html" class="btn btn-primary">Öffnen</a>
                         </div>
 
                         <div class="admin-card">
@@ -509,8 +532,16 @@
                             <div class="icon">🔔</div>
                             <h3>Benachrichtigungen</h3>
                             <p>Systemwarnungen, Sicherheitsmeldungen und wichtige Updates</p>
-                            <a href="#" class="btn btn-primary">Öffnen</a>
+                            <a href="benachrichtigungen.html" class="btn btn-primary">Öffnen</a>
                         </div>
+
+                        <a href="katze.html" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="admin-card admin-card-hidden">
+                                <div class="icon">🐱</div>
+                                <h3 style="opacity: 0;">Geheime Katze</h3>
+                                <p style="opacity: 0;">Versteckter Bereich</p>
+                            </div>
+                        </a>
 
                         <div class="admin-card admin-card-classified">
                             <div class="warning-stripes"></div>
@@ -536,6 +567,7 @@
     </div>
 
     <script src="js/admin.js"></script>
+    <script src="js/snow.js"></script>
 
     <footer class="footer">
         <div class="container">

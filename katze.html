@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Süße Katze 🐱</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+
+        .cat-container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cat-container h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        .cat-emoji {
+            font-size: 200px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .cat-emoji:hover {
+            transform: scale(1.1);
+        }
+
+        .cat-emoji.happy {
+            animation: wiggle 0.5s ease;
+        }
+
+        @keyframes wiggle {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-10deg);
+            }
+
+            75% {
+                transform: rotate(10deg);
+            }
+        }
+
+        p {
+            color: #555;
+            font-size: 18px;
+            margin-top: 20px;
+            min-height: 30px;
+        }
+
+        .hearts {
+            position: fixed;
+            pointer-events: none;
+            font-size: 30px;
+            animation: float-up 2s ease-out forwards;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-200px) scale(1.5);
+            }
+        }
+
+        .purr-meter {
+            margin-top: 30px;
+        }
+
+        .purr-meter-label {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .purr-bar {
+            width: 100%;
+            max-width: 400px;
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px auto;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .purr-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .sleeping {
+            opacity: 0.7;
+            cursor: not-allowed !important;
+        }
+
+        .timer {
+            margin-top: 20px;
+            color: #764ba2;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cat-container">
+        <h1>🐱 Katze 🐱</h1>
+        <div class="cat-emoji" id="cat">😺</div>
+        <p id="catMessage">Streichel mich! 💕</p>
+
+        <div class="purr-meter">
+            <div class="purr-meter-label">Schnurr-Meter</div>
+            <div class="purr-bar">
+                <div class="purr-fill" id="purrFill"></div>
+            </div>
+        </div>
+        <div class="timer" id="sleepTimer" style="display: none;"></div>
+    </div>
+
+    <script>
+        const cat = document.getElementById('cat');
+        const message = document.getElementById('catMessage');
+        const purrFill = document.getElementById('purrFill');
+        const sleepTimer = document.getElementById('sleepTimer');
+
+        let petCount = 0;
+        let maxPets = 10;
+        let isSleeping = false;
+        let wakeUpTime = null;
+
+        const SLEEP_DURATION = 5 * 60 * 1000; // 5 Minuten in Millisekunden
+
+        const messages = [
+            "Miau! 💕",
+            "Schnurr schnurr... 😻",
+            "Das gefällt mir! 😺",
+            "Mehr davon! 🥰",
+            "Ich liebe Streicheleinheiten! 💖",
+            "Perfekt! 😸",
+            "Du bist der Beste! 🌟",
+            "Nicht aufhören! 😻",
+            "So schön! ✨",
+            "Ich bin so glücklich! 💝"
+        ];
+
+        const catFaces = ['😺', '😸', '😻', '😽', '😼'];
+
+        // Prüfe beim Laden, ob die Katze noch schläft
+        function checkSleepStatus() {
+            const savedWakeUpTime = localStorage.getItem('catWakeUpTime');
+            if (savedWakeUpTime) {
+                wakeUpTime = parseInt(savedWakeUpTime);
+                const now = Date.now();
+
+                if (now < wakeUpTime) {
+                    startSleeping(wakeUpTime - now);
+                } else {
+                    // Schlafzeit ist vorbei
+                    localStorage.removeItem('catWakeUpTime');
+                    wakeUp();
+                }
+            }
+        }
+
+        function startSleeping(duration) {
+            isSleeping = true;
+            cat.textContent = '😴';
+            cat.classList.add('sleeping');
+            message.textContent = 'Zzz... Ich schlafe! 💤';
+            sleepTimer.style.display = 'block';
+
+            updateTimer();
+            const timerInterval = setInterval(() => {
+                if (Date.now() >= wakeUpTime) {
+                    clearInterval(timerInterval);
+                    wakeUp();
+                } else {
+                    updateTimer();
+                }
+            }, 1000);
+        }
+
+        function updateTimer() {
+            const now = Date.now();
+            const remaining = wakeUpTime - now;
+
+            if (remaining <= 0) {
+                sleepTimer.textContent = '';
+                return;
+            }
+
+            const hours = Math.floor(remaining / (1000 * 60 * 60));
+            const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+            sleepTimer.textContent = `Wacht auf in: ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        function wakeUp() {
+            isSleeping = false;
+            petCount = 0;
+            wakeUpTime = null;
+            localStorage.removeItem('catWakeUpTime');
+
+            cat.classList.remove('sleeping');
+            cat.textContent = '😺';
+            message.textContent = 'Ich bin ausgeschlafen! Streichel mich! 💕';
+            purrFill.style.width = '0%';
+            sleepTimer.style.display = 'none';
+        }
+
+        function createHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.className = 'hearts';
+            heart.textContent = '❤️';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+
+        cat.addEventListener('click', function (e) {
+            // Blockiere Interaktion wenn die Katze schläft
+            if (isSleeping) {
+                message.textContent = 'Psst! Lass mich schlafen! 😴💤';
+                return;
+            }
+
+            // Zähle Streicheleinheiten
+            petCount++;
+
+            // Aktualisiere Schnurr-Meter
+            const percentage = Math.min((petCount / maxPets) * 100, 100);
+            purrFill.style.width = percentage + '%';
+
+            // Ändere Katzengesicht
+            const randomFace = catFaces[Math.floor(Math.random() * catFaces.length)];
+            cat.textContent = randomFace;
+            cat.classList.add('happy');
+
+            // Zeige zufällige Nachricht
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            message.textContent = randomMessage;
+
+            // Erstelle Herzen an Mausposition
+            createHeart(e.clientX, e.clientY);
+
+            // Entferne Animation-Klasse nach kurzer Zeit
+            setTimeout(() => {
+                cat.classList.remove('happy');
+            }, 500);
+
+            // Schlafenszeit nach maximalen Streicheleinheiten
+            if (petCount >= maxPets) {
+                setTimeout(() => {
+                    message.textContent = "Ich bin jetzt müde! 😴💤";
+                    cat.textContent = '🥱';
+
+                    setTimeout(() => {
+                        // Setze Aufwachzeit auf 2 Stunden ab jetzt
+                        wakeUpTime = Date.now() + SLEEP_DURATION;
+                        localStorage.setItem('catWakeUpTime', wakeUpTime.toString());
+                        startSleeping(SLEEP_DURATION);
+                    }, 2000);
+                }, 500);
+            }
+        });
+
+        // Hover-Effekt
+        cat.addEventListener('mouseenter', function () {
+            if (!isSleeping && petCount < maxPets) {
+                message.textContent = "Ja, genau hier! 😊";
+            } else if (isSleeping) {
+                message.textContent = "Zzz... 😴💤";
+            }
+        });
+
+        cat.addEventListener('mouseleave', function () {
+            if (!isSleeping && petCount < maxPets) {
+                setTimeout(() => {
+                    message.textContent = "Streichel mich! 💕";
+                }, 1000);
+            }
+        });
+
+        // Prüfe Schlafstatus beim Laden der Seite
+        checkSleepStatus();
+    </script>
+</body>
+
+</html>

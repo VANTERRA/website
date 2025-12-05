@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benachrichtigungen - VANTERRA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .access-denied {
+            display: none;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .notifications-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .notification-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .notification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .notification-card.warning {
+            border-left-color: #f39c12;
+            background: linear-gradient(135deg, #fff 0%, #fff9f0 100%);
+        }
+
+        .notification-card.critical {
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #fff 0%, #fff0f0 100%);
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .notification-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .notification-icon {
+            font-size: 28px;
+        }
+
+        .notification-time {
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+
+        .notification-body {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .notification-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-info {
+            background: #3498db;
+            color: white;
+        }
+
+        .badge-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .badge-critical {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-acknowledge {
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: none;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-acknowledge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="accessDenied" class="access-denied">
+        <section class="page-header">
+            <div class="container">
+                <h1>🔒 Zugriff verweigert</h1>
+                <p>Sie haben keine Berechtigung für diese Seite.</p>
+            </div>
+        </section>
+        <section class="content-section">
+            <div class="container" style="text-align: center;">
+                <a href="admin.html" class="btn btn-primary">Zum Admin-Login</a>
+            </div>
+        </section>
+    </div>
+
+    <div id="notificationContent" style="display: none;">
+        <section class="page-header">
+            <div class="container">
+                <h1>🔔 Systembenachrichtigungen</h1>
+                <p>Aktuelle Meldungen und Sicherheitswarnungen</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <a href="admin.html" class="back-button">← Zurück zum Admin-Bereich</a>
+
+                <div class="notifications-container">
+                    <div class="notification-card critical">
+                        <div class="notification-header">
+                            <div class="notification-title">
+                                <span class="notification-icon">⚠️</span>
+                                Kritische Sicherheitswarnung
+                            </div>
+                            <div class="notification-time">Vor 2 Stunden</div>
+                        </div>
+                        <div class="notification-body">
+                            <strong>Unbefugter Zugriffsversuch auf Projekt Frostline-Dateien erkannt!</strong><br><br>
+                            Ein Mitarbeiter mit der ID <strong>151</strong> hat mehrfach versucht, auf
+                            hochklassifizierte Dokumente zuzugreifen, für die keine Berechtigung vorliegt.
+                            Der Zugriff wurde automatisch blockiert und protokolliert.<br><br>
+                            <strong>Empfohlene Maßnahme:</strong> Sofortige Überprüfung der Zugriffsrechte und
+                            persönliches Gespräch mit der betreffenden Person.
+                        </div>
+                        <div class="notification-footer">
+                            <span class="badge badge-critical">Sicherheitsstufe 5</span>
+                            <button class="btn-acknowledge">Bestätigen</button>
+                        </div>
+                    </div>
+
+                    <div class="notification-card warning">
+                        <div class="notification-header">
+                            <div class="notification-title">
+                                <span class="notification-icon">🔧</span>
+                                Geplante Systemwartung
+                            </div>
+                            <div class="notification-time">Vor 1 Tag</div>
+                        </div>
+                        <div class="notification-body">
+                            <strong>Wartungsfenster am 22. Dezember 2024, 02:00 - 06:00 Uhr</strong><br><br>
+                            Die IT-Abteilung führt planmäßige Sicherheitsupdates und Systemoptimierungen durch.
+                            Während dieser Zeit können folgende Systeme nicht verfügbar sein:
+                            <ul>
+                                <li>Internes Dokumentenmanagementsystem</li>
+                                <li>Mitarbeiterdatenbank</li>
+                                <li>VPN-Zugang</li>
+                            </ul>
+                            Bitte planen Sie Ihre Arbeiten entsprechend. Bei Notfällen kontaktieren Sie den
+                            IT-Support unter der 24/7-Hotline.
+                        </div>
+                        <div class="notification-footer">
+                            <span class="badge badge-warning">Sicherheitsstufe 3</span>
+                            <button class="btn-acknowledge">Zur Kenntnis genommen</button>
+                        </div>
+                    </div>
+
+                    <div class="notification-card">
+                        <div class="notification-header">
+                            <div class="notification-title">
+                                <span class="notification-icon">📊</span>
+                                Quartalsbericht verfügbar
+                            </div>
+                            <div class="notification-time">Vor 3 Tagen</div>
+                        </div>
+                        <div class="notification-body">
+                            <strong>Q4/2024 Forschungsbericht wurde veröffentlicht</strong><br><br>
+                            Der detaillierte Quartalsbericht für Q4/2024 steht nun im Admin-Bereich zur Verfügung.
+                            Der Bericht enthält wichtige Updates zu allen laufenden Projekten, Budgetübersichten
+                            und Planungen für das kommende Jahr.<br><br>
+                            Besonders hervorzuheben sind die Fortschritte bei Projekt Frostline und der
+                            Abteilung X7.
+                        </div>
+                        <div class="notification-footer">
+                            <span class="badge badge-info">Sicherheitsstufe 4</span>
+                            <button class="btn-acknowledge">Gelesen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Prüfe ob Admin eingeloggt ist
+        window.onload = function () {
+            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+                document.getElementById('notificationContent').style.display = 'block';
+                document.getElementById('accessDenied').style.display = 'none';
+            } else {
+                document.getElementById('notificationContent').style.display = 'none';
+                document.getElementById('accessDenied').style.display = 'block';
+            }
+        }
+
+        // Acknowledge Button Funktionalität
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('btn-acknowledge')) {
+                e.target.textContent = '✓ Bestätigt';
+                e.target.style.background = '#27ae60';
+                e.target.disabled = true;
+                e.target.style.cursor = 'not-allowed';
+            }
+        });
+    </script>
+    <script src="js/snow.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systemeinstellungen - VANTERRA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            transition: background-color 0.3s ease;
+        }
+
+        .settings-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+
+        .settings-section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3498db;
+        }
+
+        .settings-section h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .setting-description {
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+
+        .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #bdc3c7;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #3498db;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: left 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            left: 33px;
+        }
+
+        .slider-control {
+            width: 200px;
+        }
+
+        .slider-control input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .slider-value {
+            font-weight: bold;
+            color: #3498db;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .color-picker {
+            width: 50px;
+            height: 35px;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .select-control {
+            padding: 8px 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .save-button {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .save-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .reset-button {
+            background: #95a5a6;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-left: 15px;
+        }
+
+        .reset-button:hover {
+            background: #7f8c8d;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #27ae60;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .warning-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-left: 10px;
+        }
+
+        .experimental-badge {
+            background: #f39c12;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-left: 10px;
+        }
+
+        #snowCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #7f8c8d 0%, #95a5a6 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="snowCanvas"></canvas>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/vanterralogo.png" alt="VANTERRA Logo" class="logo-image">
+                <span class="logo-text">VANTERRA</span>
+                <span class="logo-tagline">Research & Development</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Über uns</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="accessDenied" style="display: none; text-align: center; padding: 100px 20px;">
+        <h1>🔒 Zugriff verweigert</h1>
+        <p>Sie müssen als Administrator eingeloggt sein.</p>
+        <a href="admin.html" class="back-button">Zum Login</a>
+    </div>
+
+    <div id="settingsContent" style="display: none;">
+        <section class="page-header">
+            <div class="container">
+                <h1>⚙️ Systemeinstellungen</h1>
+                <p>Erweiterte Konfigurationsoptionen für Ihr optimales Nutzererlebnis</p>
+            </div>
+        </section>
+
+        <div class="settings-container">
+            <a href="admin.html" class="back-button">← Zurück zum Admin-Bereich</a>
+
+            <!-- Visuelle Einstellungen -->
+            <div class="settings-section">
+                <h3>🎨 Visuelle Präferenzen</h3>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Pixel-Glättung aktivieren</div>
+                        <div class="setting-description">Aktiviert die Anti-Aliasing-Funktion für schärfere Kanten
+                        </div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle-switch" onclick="toggleSetting(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Hintergrundfarbe anpassen</div>
+                        <div class="setting-description">Wählen Sie Ihre bevorzugte Hintergrundfarbe (nur in
+                            Einstellungen sichtbar)</div>
+                    </div>
+                    <div class="setting-control">
+                        <input type="color" class="color-picker" id="bgColor" value="#ffffff"
+                            onchange="updateBackground()">
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Schriftgröße Mikroanpassung <span
+                                class="experimental-badge">BETA</span></div>
+                        <div class="setting-description">Passen Sie die Schriftgröße um ±0.001% an</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="slider-control">
+                            <input type="range" id="fontSizeSlider" min="-10" max="10" value="0" step="1"
+                                oninput="updateFontSize()">
+                        </div>
+                        <span class="slider-value" id="fontSizeValue">0.000%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animationen -->
+            <div class="settings-section">
+                <h3>✨ Animationseffekte</h3>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Schneefall-Effekt ❄️ <span class="warning-badge">GLOBAL</span>
+                        </div>
+                        <div class="setting-description">Aktiviert einen Schneefall-Effekt auf der gesamten Website
+                        </div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle-switch" id="snowToggle" onclick="toggleSnow(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Button-Hover-Verzögerung</div>
+                        <div class="setting-description">Verzögerung der Hover-Effekte</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="slider-control">
+                            <input type="range" id="hoverDelaySlider" min="0" max="2000" value="0" step="50"
+                                oninput="updateHoverDelay()">
+                        </div>
+                        <span class="slider-value" id="hoverDelayValue">0ms</span>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Scroll-Geschwindigkeit</div>
+                        <div class="setting-description">Ändern Sie die Scroll-Geschwindigkeit
+                        </div>
+                    </div>
+                    <div class="setting-control">
+                        <select class="select-control">
+                            <option>Normal</option>
+                            <option>Langsam</option>
+                            <option>Sehr langsam</option>
+                            <option>Schneller als das Licht</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Erweiterte Optionen -->
+            <div class="settings-section">
+                <h3>🔧 Erweiterte Optionen <span class="experimental-badge">EXPERIMENTELL</span></h3>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Doppel-Klick-Reaktionszeit</div>
+                        <div class="setting-description">Ändern Sie die Empfindlichkeit für Doppelklicks</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="slider-control">
+                            <input type="range" id="doubleClickSlider" min="100" max="1000" value="500" step="50"
+                                oninput="updateDoubleClick()">
+                        </div>
+                        <span class="slider-value" id="doubleClickValue">500ms</span>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Mauszeiger-Präzision erhöhen <span
+                                class="warning-badge">PLACEBO</span></div>
+                        <div class="setting-description">Verbessert theoretisch die Mauszeiger-Genauigkeit um 0.00001%
+                        </div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle-switch" onclick="toggleSetting(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Quantum-Rendering-Modus</div>
+                        <div class="setting-description">Nutzt "Quantencomputing" für schnelleres Rendering</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle-switch" onclick="toggleSetting(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">KI-gestützte Optimierung</div>
+                        <div class="setting-description">Maschinelles Lernen analysiert Ihre Nutzung
+                        </div>
+                    </div>
+                    <div class="setting-control">
+                        <select class="select-control">
+                            <option>Deaktiviert</option>
+                            <option>Niedrig</option>
+                            <option>Mittel</option>
+                            <option>Hoch</option>
+                            <option>MAXIMUM OVERDRIVE</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Akustische Optionen -->
+            <div class="settings-section">
+                <h3>🔊 Akustische Einstellungen</h3>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">System-Töne aktivieren</div>
+                        <div class="setting-description">Aktiviert Soundeffekte für Systemereignisse (es gibt keine
+                            Sounds)</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle-switch" onclick="toggleSetting(this)">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Lautstärke der UI-Sounds</div>
+                        <div class="setting-description">Stellt die Lautstärke nicht vorhandener Sounds ein</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="slider-control">
+                            <input type="range" id="volumeSlider" min="0" max="100" value="50" oninput="updateVolume()">
+                        </div>
+                        <span class="slider-value" id="volumeValue">50%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button class="save-button" onclick="saveSettings()">💾 Einstellungen speichern</button>
+                <button class="reset-button" onclick="resetSettings()">🔄 Zurücksetzen</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        ✅ Einstellungen erfolgreich gespeichert
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VANTERRA</h4>
+                    <p>Innovation. Forschung. Zukunft.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p>© 2024 VANTERRA Corp. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Access Control
+        window.onload = function () {
+            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+                document.getElementById('settingsContent').style.display = 'block';
+                document.getElementById('accessDenied').style.display = 'none';
+
+                // Lade gespeicherte Hintergrundfarbe
+                const savedBgColor = localStorage.getItem('settingsBgColor');
+                if (savedBgColor) {
+                    document.body.style.backgroundColor = savedBgColor;
+                    document.getElementById('bgColor').value = savedBgColor;
+                }
+
+                // Lade Schnee-Status
+                const snowEnabled = localStorage.getItem('snowEnabled') === 'true';
+                if (snowEnabled) {
+                    const snowToggle = document.getElementById('snowToggle');
+                    snowToggle.classList.add('active');
+                    startSnow();
+                }
+            } else {
+                document.getElementById('settingsContent').style.display = 'none';
+                document.getElementById('accessDenied').style.display = 'block';
+            }
+        }
+
+        // Toggle Switch
+        function toggleSetting(element) {
+            element.classList.toggle('active');
+        }
+
+        // Background Color - JETZT FUNKTIONAL!
+        function updateBackground() {
+            const color = document.getElementById('bgColor').value;
+            document.body.style.backgroundColor = color;
+            localStorage.setItem('settingsBgColor', color);
+        }
+
+        // Font Size
+        function updateFontSize() {
+            const value = document.getElementById('fontSizeSlider').value;
+            const percentage = (value * 0.001).toFixed(3);
+            document.getElementById('fontSizeValue').textContent = percentage + '%';
+        }
+
+        // Snow Effect
+        let snowActive = false;
+        let snowAnimationId;
+
+        function toggleSnow(element) {
+            element.classList.toggle('active');
+            snowActive = !snowActive;
+
+            // Speichere den Status
+            localStorage.setItem('snowEnabled', snowActive);
+
+            const canvas = document.getElementById('snowCanvas');
+            if (snowActive) {
+                canvas.style.opacity = '0.8';
+                startSnow();
+            } else {
+                canvas.style.opacity = '0';
+                cancelAnimationFrame(snowAnimationId);
+            }
+        }
+
+        function startSnow() {
+            const canvas = document.getElementById('snowCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const snowflakes = [];
+            const snowflakeCount = 150;
+
+            // Erstelle Schneeflocken
+            for (let i = 0; i < snowflakeCount; i++) {
+                snowflakes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 3 + 1,
+                    speed: Math.random() * 1 + 0.5,
+                    drift: Math.random() * 0.5 - 0.25
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'white';
+                ctx.strokeStyle = 'white';
+
+                snowflakes.forEach(flake => {
+                    ctx.beginPath();
+                    ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Bewege Schneeflocke
+                    flake.y += flake.speed;
+                    flake.x += flake.drift;
+
+                    // Zurücksetzen wenn außerhalb
+                    if (flake.y > canvas.height) {
+                        flake.y = -10;
+                        flake.x = Math.random() * canvas.width;
+                    }
+                    if (flake.x > canvas.width) {
+                        flake.x = 0;
+                    }
+                    if (flake.x < 0) {
+                        flake.x = canvas.width;
+                    }
+                });
+
+                snowAnimationId = requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Hover Delay
+        function updateHoverDelay() {
+            const value = document.getElementById('hoverDelaySlider').value;
+            document.getElementById('hoverDelayValue').textContent = value + 'ms';
+        }
+
+        // Double Click
+        function updateDoubleClick() {
+            const value = document.getElementById('doubleClickSlider').value;
+            document.getElementById('doubleClickValue').textContent = value + 'ms';
+        }
+
+        // Volume
+        function updateVolume() {
+            const value = document.getElementById('volumeSlider').value;
+            document.getElementById('volumeValue').textContent = value + '%';
+        }
+
+        // Save Settings
+        function saveSettings() {
+            // Speichere aktuelle Hintergrundfarbe
+            const bgColor = document.getElementById('bgColor').value;
+            localStorage.setItem('settingsBgColor', bgColor);
+
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Reset Settings
+        function resetSettings() {
+            document.querySelectorAll('.toggle-switch.active').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById('fontSizeSlider').value = 0;
+            document.getElementById('hoverDelaySlider').value = 0;
+            document.getElementById('doubleClickSlider').value = 500;
+            document.getElementById('volumeSlider').value = 50;
+            document.getElementById('bgColor').value = '#ffffff';
+
+            // Setze Hintergrundfarbe zurück
+            document.body.style.backgroundColor = '#ffffff';
+            localStorage.removeItem('settingsBgColor');
+
+            // Deaktiviere Schnee
+            if (snowActive) {
+                const snowToggle = document.getElementById('snowToggle');
+                toggleSnow(snowToggle);
+            }
+            localStorage.removeItem('snowEnabled');
+
+            updateFontSize();
+            updateHoverDelay();
+            updateDoubleClick();
+            updateVolume();
+        }
+
+        // Resize Canvas
+        window.addEventListener('resize', () => {
+            if (snowActive) {
+                const canvas = document.getElementById('snowCanvas');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+    </script>
+</body>
+
+</html>
