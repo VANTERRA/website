@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silvester Countdown 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite, starDrift 1200s linear infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes starDrift {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 60px;
+        }
+
+        h1 {
+            font-size: 5vw;
+            color: #ffd700;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
+                0 0 30px rgba(255, 215, 0, 0.5);
+            margin-bottom: 50px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(255, 215, 0, 0.5);
+            border-radius: 30px;
+            padding: 40px 50px;
+            min-width: 250px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .time-box:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .time-box:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .time-box:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+
+        .time-box:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+        }
+
+        .time {
+            font-size: 7vw;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            line-height: 1;
+        }
+
+        .label {
+            font-size: 2vw;
+            color: #ffd700;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+
+        .rocket {
+            position: absolute;
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(to top, transparent, var(--color));
+            animation: rocketFly 1.5s ease-out forwards;
+        }
+
+        @keyframes rocketFly {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            70% {
+                transform: translateY(var(--height)) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(var(--height)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--color);
+            border-radius: 50%;
+            animation: sparkleAnim 0.8s ease-out forwards;
+            box-shadow: 0 0 10px var(--color);
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px 60px;
+            border-radius: 30px;
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+        }
+
+        .celebration.active {
+            display: block;
+            animation: celebrationZoom 2s ease-out;
+        }
+
+        @keyframes celebrationZoom {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .celebration h2 {
+            font-size: 8vw;
+            color: #ffd700;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 1),
+                0 0 100px rgba(255, 215, 0, 0.8);
+            margin-bottom: 30px;
+        }
+
+        .celebration p {
+            font-size: 6vw;
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+        }
+
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ffd700;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .countdown {
+                gap: 40px;
+            }
+
+            .time-box {
+                padding: 30px 40px;
+                min-width: 180px;
+            }
+        }
+
+        .easter-egg {
+            position: fixed;
+            bottom: 10px;
+            right: 15px;
+            font-size: 8px;
+            color: rgba(255, 255, 255, 0.15);
+            z-index: 1;
+            font-family: monospace;
+        }
+
+        .moon {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            box-shadow: -30px 0px 0px 0px #ffd700;
+            background: transparent;
+            z-index: 5;
+            animation: moonDrift 1200s linear infinite;
+        }
+
+        @keyframes moonDrift {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="easter-egg">William stinkt</div>
+
+    <div class="container">
+        <h1>Silvester Countdown 2026</h1>
+        <div class="countdown">
+            <div class="time-box">
+                <div class="time" id="hours">00</div>
+                <div class="label">Stunden</div>
+            </div>
+            <div class="time-box">
+                <div class="time" id="minutes">00</div>
+                <div class="label">Minuten</div>
+            </div>
+            <div class="time-box">
+                <div class="time" id="seconds">00</div>
+                <div class="label">Sekunden</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="celebration" id="celebration">
+        <h2>🎉 FROHES NEUES JAHR! 🎉</h2>
+        <p>2026</p>
+    </div>
+
+    <script>
+        // Sterne generieren - von links startend
+        const starsContainer = document.getElementById('stars');
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = '-10px'; // Links außerhalb des Bildschirms starten
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = `3s, ${1200 + Math.random() * 600}s`; // twinkle: 3s, starDrift: 1200-1800s
+            starsContainer.appendChild(star);
+
+            // Stern nach Animation entfernen
+            setTimeout(() => {
+                if (star.parentNode) {
+                    star.remove();
+                }
+            }, 1850000); // Nach 1850 Sekunden entfernen
+        }
+
+        // Initial 150 Sterne generieren
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%'; // Initial über ganzen Bildschirm verteilt
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = `3s, ${1200 + Math.random() * 600}s`; // twinkle: 3s, starDrift: 1200-1800s
+            starsContainer.appendChild(star);
+        }
+
+        // Kontinuierlich neue Sterne hinzufügen
+        setInterval(() => {
+            createStar();
+        }, 2000); // Alle 2 Sekunden ein neuer Stern
+
+        // Mond-Generierung
+        function createMoon(initialPosition = false) {
+            const moon = document.createElement('div');
+            moon.className = 'moon';
+            if (initialPosition) {
+                moon.style.left = '10%'; // Initial im Bildschirm sichtbar
+            } else {
+                moon.style.left = '-130px'; // Neue Monde von links
+            }
+            moon.style.top = (2 + Math.random() * 8) + '%'; // Höher am Himmel (2-10%)
+            moon.style.animationDuration = `${1200 + Math.random() * 600}s`; // moonDrift: 1200-1800s
+            document.body.appendChild(moon);
+
+            // Mond nach Animation entfernen
+            setTimeout(() => {
+                if (moon.parentNode) {
+                    moon.remove();
+                }
+            }, 1850000); // Nach 1850 Sekunden entfernen
+        }
+
+        // Initial einen Mond erstellen (sichtbar)
+        createMoon(true);
+
+        // Regelmäßig neue Monde hinzufügen (alle 10 Minuten)
+        setInterval(() => {
+            createMoon();
+        }, 600000); // Alle 10 Minuten ein neuer Mond
+
+        // Countdown Timer mit Atomuhr-Synchronisation
+        const targetDate = new Date('January 1, 2026 00:00:00').getTime();
+        let timeOffset = 0; // Zeitdifferenz zwischen lokaler Zeit und Server-Zeit
+
+        // Zeit von World Time API holen
+        async function syncTime() {
+            try {
+                const response = await fetch('https://worldtimeapi.org/api/timezone/Europe/Berlin');
+                const data = await response.json();
+                const serverTime = new Date(data.datetime).getTime();
+                const localTime = new Date().getTime();
+                timeOffset = serverTime - localTime;
+                console.log('Zeit synchronisiert mit Atomuhr. Offset:', timeOffset, 'ms');
+            } catch (error) {
+                console.log('Zeitsynchro fehlgeschlagen, nutze lokale Zeit:', error);
+            }
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime() + timeOffset; // Korrigierte Zeit mit Offset
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                // Neujahr ist da!
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+
+                celebrate();
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const totalHours = days * 24 + Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('hours').textContent = String(totalHours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Zeit beim Start synchronisieren
+        syncTime();
+
+        // Klassisches Kreis-Feuerwerk
+        function createFirework(x, y) {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffd700', '#ff6347'];
+            const particles = 50;
+
+            for (let i = 0; i < particles; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                const angle = (Math.PI * 2 * i) / particles;
+                const velocity = 100 + Math.random() * 100;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+
+                firework.style.setProperty('--tx', tx + 'px');
+                firework.style.setProperty('--ty', ty + 'px');
+
+                document.body.appendChild(firework);
+
+                setTimeout(() => firework.remove(), 1000);
+            }
+        }
+
+        // Raketen-Feuerwerk mit aufsteigender Rakete
+        function createRocket(x, y) {
+            const colors = ['#ff1744', '#00e676', '#2979ff', '#ffea00', '#ff4081', '#00e5ff'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            const rocket = document.createElement('div');
+            rocket.className = 'rocket';
+            rocket.style.left = x + 'px';
+            rocket.style.top = y + 'px';
+            rocket.style.setProperty('--color', color);
+            rocket.style.setProperty('--height', -(200 + Math.random() * 200) + 'px');
+
+            document.body.appendChild(rocket);
+
+            // Explosion nach 1 Sekunde
+            setTimeout(() => {
+                createFirework(x, y - 200 - Math.random() * 200);
+                rocket.remove();
+            }, 1000);
+        }
+
+        // Spiral-Feuerwerk
+        function createSpiralFirework(x, y) {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffd700'];
+            const particles = 60;
+            const spirals = 3;
+
+            for (let i = 0; i < particles; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                firework.style.background = colors[i % colors.length];
+
+                const angle = (Math.PI * 2 * i * spirals) / particles;
+                const radius = (i / particles) * 150;
+                const tx = Math.cos(angle) * radius;
+                const ty = Math.sin(angle) * radius;
+
+                firework.style.setProperty('--tx', tx + 'px');
+                firework.style.setProperty('--ty', ty + 'px');
+
+                document.body.appendChild(firework);
+                setTimeout(() => firework.remove(), 1000);
+            }
+        }
+
+        // Herz-Feuerwerk
+        function createHeartFirework(x, y) {
+            const color = '#ff1744';
+            const particles = 80;
+
+            for (let i = 0; i < particles; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                firework.style.background = Math.random() > 0.5 ? '#ff1744' : '#ff4081';
+
+                const t = (i / particles) * Math.PI * 2;
+                const scale = 80;
+                const tx = scale * (16 * Math.pow(Math.sin(t), 3));
+                const ty = -scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+
+                firework.style.setProperty('--tx', tx + 'px');
+                firework.style.setProperty('--ty', ty + 'px');
+
+                document.body.appendChild(firework);
+                setTimeout(() => firework.remove(), 1000);
+            }
+        }
+
+        // Willow-Feuerwerk (Trauerweide)
+        function createWillowFirework(x, y) {
+            const colors = ['#ffd700', '#ffea00', '#fff59d'];
+            const particles = 70;
+
+            for (let i = 0; i < particles; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                const angle = (Math.PI * 2 * i) / particles;
+                const velocity = 80 + Math.random() * 60;
+                const tx = Math.cos(angle) * velocity * 0.7;
+                const ty = Math.sin(angle) * velocity + Math.random() * 100;
+
+                firework.style.setProperty('--tx', tx + 'px');
+                firework.style.setProperty('--ty', ty + 'px');
+
+                document.body.appendChild(firework);
+                setTimeout(() => firework.remove(), 1000);
+            }
+        }
+
+        // Funkeln-Effekt
+        function createSparkles(x, y) {
+            const colors = ['#ffffff', '#ffd700', '#00e5ff', '#ff4081'];
+            const particles = 30;
+
+            for (let i = 0; i < particles; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                sparkle.style.setProperty('--color', color);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 30 + Math.random() * 50;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+
+                sparkle.style.setProperty('--tx', tx + 'px');
+                sparkle.style.setProperty('--ty', ty + 'px');
+
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 800);
+            }
+        }
+
+        // Zufälliges Feuerwerk auswählen
+        function createRandomFirework(x, y) {
+            const types = [
+                () => createFirework(x, y),
+                () => createRocket(x, window.innerHeight),
+                () => createSpiralFirework(x, y),
+                () => createHeartFirework(x, y),
+                () => createWillowFirework(x, y),
+                () => createSparkles(x, y)
+            ];
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            randomType();
+        }
+
+        // Konfetti erstellen
+        function createConfetti() {
+            const colors = ['#ffd700', '#ff6347', '#00ff00', '#00bfff', '#ff00ff'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.animationDuration = (3 + Math.random() * 2) + 's';
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 6000);
+                }, i * 30);
+            }
+        }
+
+        // Feier-Animation
+        let celebrationStarted = false;
+        function celebrate() {
+            if (celebrationStarted) return;
+            celebrationStarted = true;
+
+            // Zeige Glückwunsch-Nachricht
+            document.getElementById('celebration').classList.add('active');
+
+            // Starte Feuerwerk - viele verschiedene Typen
+            const fireworkInterval = setInterval(() => {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                createRandomFirework(x, y);
+            }, 200);
+
+            // Extra Raketen während Celebration
+            const rocketInterval = setInterval(() => {
+                const x = Math.random() * window.innerWidth;
+                createRocket(x, window.innerHeight);
+            }, 400);
+
+            // Konfetti
+            createConfetti();
+            setInterval(createConfetti, 3000);
+
+            // Hintergrund-Animation
+            document.body.style.animation = 'backgroundCelebration 5s ease-in-out infinite';
+
+            // Sound könnte hier hinzugefügt werden
+        }
+
+        // Style für Celebration
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes backgroundCelebration {
+                0%, 100% { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+                25% { background: linear-gradient(135deg, #2e1a1a 0%, #3e1621 50%, #600f34 100%); }
+                50% { background: linear-gradient(135deg, #1a2e1a 0%, #163e21 50%, #0f6034 100%); }
+                75% { background: linear-gradient(135deg, #1a1a2e 0%, #21163e 50%, #340f60 100%); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Update Countdown jede Sekunde
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Automatisches Feuerwerk für Atmosphäre - mehrere gleichzeitig
+        setInterval(() => {
+            if (!celebrationStarted) {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * (window.innerHeight / 2);
+                createRandomFirework(x, y);
+            }
+        }, 4000);
+
+        // Zusätzliche Raketen von unten
+        setInterval(() => {
+            if (!celebrationStarted) {
+                const x = Math.random() * window.innerWidth;
+                createRocket(x, window.innerHeight);
+            }
+        }, 6000);
+
+        // Gelegentliche Funkeln-Effekte
+        setInterval(() => {
+            if (!celebrationStarted) {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                createSparkles(x, y);
+            }
+        }, 5000);
+    </script>
+</body>
+
+</html>
