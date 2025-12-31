@@ -287,27 +287,6 @@
             z-index: 1;
             font-family: monospace;
         }
-
-        .moon {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            box-shadow: -30px 0px 0px 0px #ffd700;
-            background: transparent;
-            z-index: 5;
-            animation: moonDrift 1200s linear infinite;
-        }
-
-        @keyframes moonDrift {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(100vw);
-            }
-        }
     </style>
 </head>
 
@@ -375,35 +354,6 @@
         setInterval(() => {
             createStar();
         }, 2000); // Alle 2 Sekunden ein neuer Stern
-
-        // Mond-Generierung
-        function createMoon(initialPosition = false) {
-            const moon = document.createElement('div');
-            moon.className = 'moon';
-            if (initialPosition) {
-                moon.style.left = '10%'; // Initial im Bildschirm sichtbar
-            } else {
-                moon.style.left = '-130px'; // Neue Monde von links
-            }
-            moon.style.top = (2 + Math.random() * 8) + '%'; // Höher am Himmel (2-10%)
-            moon.style.animationDuration = `${1200 + Math.random() * 600}s`; // moonDrift: 1200-1800s
-            document.body.appendChild(moon);
-
-            // Mond nach Animation entfernen
-            setTimeout(() => {
-                if (moon.parentNode) {
-                    moon.remove();
-                }
-            }, 1850000); // Nach 1850 Sekunden entfernen
-        }
-
-        // Initial einen Mond erstellen (sichtbar)
-        createMoon(true);
-
-        // Regelmäßig neue Monde hinzufügen (alle 10 Minuten)
-        setInterval(() => {
-            createMoon();
-        }, 600000); // Alle 10 Minuten ein neuer Mond
 
         // Countdown Timer mit Atomuhr-Synchronisation
         const targetDate = new Date('January 1, 2026 00:00:00').getTime();
